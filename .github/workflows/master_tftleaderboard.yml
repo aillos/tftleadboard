@@ -22,18 +22,15 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: mvn clean install
         env:
           ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
+        run: mvn clean install
+
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
-        env:
-          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
@@ -50,10 +47,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: java-app
-        env:
-          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
 
 
       - name: Deploy to Azure Web App
