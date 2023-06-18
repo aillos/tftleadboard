@@ -35,13 +35,6 @@ jobs:
           RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
         run: mvn clean install
 
-      - name: Check contents of target directory
-        run: ls -la ${{ github.workspace }}/target
-
-      - name: Modify web.config
-        run: |
-          sed -i 's|<appSettings>|<appSettings>\n  <add key="ACCESS_KEY" value="'${{ secrets.ACCESS_KEY }}'" />\n  <add key="SECRET_KEY" value="'${{ secrets.SECRET_KEY }}'" />\n  <add key="RIOT_API_KEY" value="'${{ secrets.RIOT_API_KEY }}'" />|' ${{ github.workspace }}/target/web.config
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
@@ -60,6 +53,28 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: java-app
+
+      - name: Set Azure Web App configuration
+        uses: azure/webapps-configuration@1
+        with:
+          app-name: 'tftleaderboard'
+          slot-name: 'Production'
+          resource-group-name: 'your-resource-group-name'
+          app-settings-json: |
+            [
+              {
+                "name": "ACCESS_KEY",
+                "value": "${{ secrets.ACCESS_KEY }}"
+              },
+              {
+                "name": "SECRET_KEY",
+                "value": "${{ secrets.SECRET_KEY }}"
+              },
+              {
+                "name": "RIOT_API_KEY",
+                "value": "${{ secrets.RIOT_API_KEY }}"
+              }
+            ]
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
