@@ -23,11 +23,6 @@ public class Controller {
         repo.updateSummoner(Summoner);
     }
 
-     @GetMapping("/test")
-    public void test() {
-        repo.test();
-    }
-
     @GetMapping("/getAll")
     public List<com.aillos.tftleadboard.Summoner> getAll() {
         return repo.getAllSummoners();

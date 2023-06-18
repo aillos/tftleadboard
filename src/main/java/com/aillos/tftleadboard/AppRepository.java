@@ -39,12 +39,6 @@ public class AppRepository {
         }
     }
 
-
-    public void test(){
-        String sql = "CREATE TABLE SUMMONER";
-        db.update(sql);
-    }
-
     public List<Summoner> getAllSummoners(){
         String sql = "SELECT * FROM Summoner ORDER BY dbo.rankToInt(CONCAT(rank, tier, lp)) DESC";
 

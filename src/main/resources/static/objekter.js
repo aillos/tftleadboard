@@ -1,5 +1,6 @@
 
 $(function(){
+    createDivs(summonerIds);
     getAll();
     fetchAPI();
 });
@@ -17,6 +18,7 @@ function fetchAPI (){
         });
 }
 
+
 const summonerIds = [
     'j2kZ6bdKhnsvdD7ZycyXrplJ3a70d7lsEX1sFDQEllcyhQ0',
     'NJhqW6YOTn82waWKj-4HG6GRRxZRfEnHqfi0SxFMAN9kWfk',
@@ -25,7 +27,54 @@ const summonerIds = [
     '4B22JkbZTUImpYIXYgXZj77YykA_3F_g-HHtSbS64ImNpSPR',
     'f3z5geiLxUXGyG-_-zJ8RD-KZjxWbzME5tQS6BfUsL6SqtA'
 ];
-// Function to fetch data from Riot API
+
+function createDivs(summonerIds) {
+    summonerIds.forEach((summonerId, index) => {
+        const player = document.createElement('div');
+        player.setAttribute("class", "player");
+        player.classList.add('player');
+        if ((index+1) % 2 === 0) {
+            player.classList.add('even');
+        } else {
+            player.classList.add('odd');
+        }
+        const playerInfo = document.createElement('div');
+        playerInfo.setAttribute("class", "player-info");
+        const summonerName = document.createElement('h2');
+        summonerName.setAttribute("id", "summoner"+(index+1));
+        const summonerIcon = document.createElement('img');
+        summonerIcon.setAttribute("class", "summoner-icon");
+        summonerIcon.setAttribute("id", "summonerIcon"+(index+1));
+        const games = document.createElement('p');
+        games.setAttribute("id","games"+(index+1));
+        const wins = document.createElement('p');
+        wins.setAttribute("id","wins"+(index+1));
+        const losses = document.createElement('p');
+        losses.setAttribute("id","losses"+(index+1));
+        const wr = document.createElement('p');
+        wr.setAttribute("id","wr"+(index+1));
+        const rank = document.createElement('p');
+        rank.style.display = 'inline-block';
+        rank.style.marginRight = '-20px';
+        const pRank = document.createElement('p');
+        pRank.setAttribute("id","rank"+(index+1));
+        pRank.setAttribute("class", "rank");
+        pRank.style.display='inline-block';
+
+        playerInfo.appendChild(summonerName);
+        playerInfo.appendChild(summonerIcon);
+        playerInfo.appendChild(games);
+        playerInfo.appendChild(wins);
+        playerInfo.appendChild(losses);
+        playerInfo.appendChild(wr);
+        playerInfo.appendChild(rank);
+        playerInfo.appendChild(pRank);
+        player.appendChild(playerInfo);
+
+        document.getElementById('main').appendChild(player);
+    });
+}
+
 function fetchDataFromRiotAPI(endpoint) {
     const url = `${endpoint}?api_key=${riotApiKey}`;
 
@@ -41,8 +90,6 @@ function fetchDataFromRiotAPI(endpoint) {
         });
 }
 
-// Example usaged
-
 
 function addExistingSummoners() {
     summonerIds.forEach(summonerId => {
@@ -53,7 +100,6 @@ function addExistingSummoners() {
                     const leagueEntry = data[0];
                     const { leaguePoints, tier, losses, rank, summonerName, wins } = leagueEntry;
 
-                    // Store the retrieved values as const variables
                     const storedLeaguePoints = leaguePoints;
                     const storedLosses = losses;
                     const storedRank = rank;
@@ -61,11 +107,6 @@ function addExistingSummoners() {
                     const storedWins = wins;
                     const storedTier = tier;
 
-                    console.log('Stored League Points:', storedLeaguePoints);
-                    console.log('Stored Losses:', storedLosses);
-                    console.log('Stored Rank:', storedRank);
-                    console.log('Stored Summoner Name:', storedSummonerName);
-                    console.log('Stored Wins:', storedWins);
 
                     const endpoint2 = `https://euw1.api.riotgames.com/tft/summoner/v1/summoners/${summonerId}`;
                     fetchDataFromRiotAPI(endpoint2)
@@ -76,9 +117,6 @@ function addExistingSummoners() {
                                 // Store the retrieved values as const variables
                                 const storedSummonerId = id;
                                 const storedSummonerIcon = profileIconId;
-
-                                console.log('Stored SummonerID:', storedSummonerId);
-                                console.log('Stored SummonerIcon:', storedSummonerIcon);
 
                                 const Summoner = {
                                     summonerName: storedSummonerName,
@@ -127,7 +165,6 @@ function deleteAll() {
     })
     window.location.href="/";
 }
-
 
 function save() {
     const Summoner = {

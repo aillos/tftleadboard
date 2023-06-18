@@ -8,14 +8,17 @@
 }
 
 .main {
-    margin: 20px auto;
     text-align: center;
-    display: flex; /* Updated */
-    justify-content: center; /* Added */
-    align-content: center;
-    align-items: center;
-    flex-wrap: wrap; /* Added */
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
+    grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
+    justify-content: center; /* Center the grid items horizontally */
+    align-items: center; /* Center the grid items vertically */
+    background-color: #2e2e33;
+    color: white;
+    width: 100%;
 }
+
 
 
 .h1{
@@ -52,6 +55,7 @@
     max-width: 100%; /* Adjust the width to maintain aspect ratio */
 }
 
+
 .player {
     display: grid;
     grid-template-rows: auto;
@@ -61,8 +65,18 @@
     height: 180px;
     width: 450px;
     background-color: #3e4044;
-    margin: 10px auto; /* Updated */
+    margin: 20px;
 }
+
+.player.even {
+    justify-self: start; /* Align even-indexed .player to the start of the cell */
+}
+
+.player.odd {
+    justify-self: end; /* Align odd-indexed .player to the end of the cell */
+}
+
+
 
 
 
