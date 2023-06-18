@@ -18,8 +18,9 @@ jobs:
 
       - name: Set environment variables
         env:
-          ACCESS_KEY: ${{secrets.ACCESS_KEY}}
-          SECRET_KEY: ${{secrets.SECRET_KEY}}
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
           
       - name: Set up Java version
         uses: actions/setup-java@v1
@@ -29,11 +30,16 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
         env:
-          ACCESS_KEY: ${{secrets.ACCESS_KEY}}
-          SECRET_KEY: ${{secrets.SECRET_KEY}}
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
+        env:
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
@@ -51,8 +57,9 @@ jobs:
         with:
           name: java-app
         env:
-          ACCESS_KEY: ${{secrets.ACCESS_KEY}}
-          SECRET_KEY: ${{secrets.SECRET_KEY}}
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
 
 
       - name: Deploy to Azure Web App
