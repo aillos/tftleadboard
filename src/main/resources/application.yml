@@ -6,5 +6,5 @@ cloud:
       static: eu-north-1
       auto: false
     credentials:
-      access-key: ${ACCESS_KEY}
+      access-key: AKIAT7GPMMJFE56UVEFR
       secret-key: ${SECRET_KEY}
