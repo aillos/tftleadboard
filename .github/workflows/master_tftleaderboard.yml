@@ -35,6 +35,9 @@ jobs:
           RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
         run: mvn clean install
 
+      - name: Check contents of target directory
+        run: ls -la ${{ github.workspace }}/target
+
       - name: Modify web.config
         run: |
           sed -i 's|<appSettings>|<appSettings>\n  <add key="ACCESS_KEY" value="'${{ secrets.ACCESS_KEY }}'" />\n  <add key="SECRET_KEY" value="'${{ secrets.SECRET_KEY }}'" />\n  <add key="RIOT_API_KEY" value="'${{ secrets.RIOT_API_KEY }}'" />|' ${{ github.workspace }}/target/web.config
