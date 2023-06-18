@@ -16,6 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set environment variables
+        run: |
+          echo "ACCESS_KEY=${{ secrets.ACCESS_KEY }}" >> $GITHUB_ENV
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+          echo "RIOT_API_KEY=${{ secrets.RIOT_API_KEY }}" >> $GITHUB_ENV
+          
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
