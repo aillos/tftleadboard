@@ -47,7 +47,7 @@ jobs:
         run: |
           echo "ACCESS_KEY=${{ secrets.ACCESS_KEY }}" >> $GITHUB_ENV
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
-          echo "RIOT_API_KEY=${{ env.RIOT_API_KEY }}" >> $GITHUB_ENV
+          echo "RIOT_API_KEY=${{ secrets.RIOT_API_KEY }}" >> $GITHUB_ENV
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
