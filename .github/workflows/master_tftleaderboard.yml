@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and deploy JAR app to Azure Web App - tftleaderboard
 
 on:
@@ -21,6 +24,7 @@ jobs:
           echo "SECRET_KEY: $SECRET_KEY"
           echo "RIOT_API_KEY: $RIOT_API_KEY"
 
+
       - uses: actions/checkout@v2
 
       - name: Set up Java version
@@ -34,6 +38,7 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
         run: mvn clean install
+
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -54,27 +59,6 @@ jobs:
         with:
           name: java-app
 
-      - name: Set Azure Web App configuration
-        uses: azure/webapps-configuration@1
-        with:
-          app-name: 'tftleaderboard'
-          slot-name: 'Production'
-          resource-group-name: 'your-resource-group-name'
-          app-settings-json: |
-            [
-              {
-                "name": "ACCESS_KEY",
-                "value": "${{ secrets.ACCESS_KEY }}"
-              },
-              {
-                "name": "SECRET_KEY",
-                "value": "${{ secrets.SECRET_KEY }}"
-              },
-              {
-                "name": "RIOT_API_KEY",
-                "value": "${{ secrets.RIOT_API_KEY }}"
-              }
-            ]
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -84,3 +68,4 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_721761E2D9184EFDA75D58D839FCA0F0 }}
           package: '*.jar'
+
