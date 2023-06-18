@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class API {
-    @Value("${RIOT_API_KEY}")
+    @Value("${RIOT_KEY}")
     private String riotApi;
 
-    @GetMapping("/riot-api-key")
+    @GetMapping("/riot-key")
     public String getRiotApiKey() {
         return riotApi;
     }

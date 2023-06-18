@@ -7,7 +7,7 @@ $(function(){
 let riotApiKey = "";
 
 function fetchAPI (){
-    fetch('/api/riot-api-key')
+    fetch('/api/riot-key')
         .then(response => response.text())
         .then(apiKey => {
             // Use the apiKey value retrieved from the API
