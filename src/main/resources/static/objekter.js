@@ -10,12 +10,9 @@ function fetchAPI (){
     fetch('/api/riot-key')
         .then(response => response.text())
         .then(apiKey => {
-            // Use the apiKey value retrieved from the API
             riotApiKey = apiKey;
-            console.log(apiKey);
         })
         .catch(error => {
-            // Handle any errors that occur during the API request
             console.error('Error retrieving Riot API key:', error);
         });
 }
