@@ -28,7 +28,11 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: |
+        mvn clean install
+        echo "ACCESS_KEY=${{ secrets.ACCESS_KEY }}" >> $GITHUB_ENV
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+        echo "RIOT_API_KEY=${{ secrets.RIOT_API_KEY }}" >> $GITHUB_ENV
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
