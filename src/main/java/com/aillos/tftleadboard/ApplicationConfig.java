@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 @Configuration
 public class ApplicationConfig {
 
+
     @Value("${cloud.aws.credentials.access-key}")
     private String accessKey;
     @Value("${cloud.aws.credentials.secret-key}")

@@ -37,4 +37,5 @@ public class Controller {
     public void deleteAll() {
         repo.deleteAllSummoner();
     }
+
 }

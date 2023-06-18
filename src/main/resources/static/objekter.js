@@ -1,7 +1,24 @@
 
 $(function(){
     getAll();
+    fetchAPI();
 });
+
+let riotApiKey = "";
+
+function fetchAPI (){
+    fetch('/api/riot-api-key')
+        .then(response => response.text())
+        .then(apiKey => {
+            // Use the apiKey value retrieved from the API
+            riotApiKey = apiKey;
+            console.log(apiKey);
+        })
+        .catch(error => {
+            // Handle any errors that occur during the API request
+            console.error('Error retrieving Riot API key:', error);
+        });
+}
 
 const summonerIds = [
     'j2kZ6bdKhnsvdD7ZycyXrplJ3a70d7lsEX1sFDQEllcyhQ0',
@@ -13,7 +30,7 @@ const summonerIds = [
 ];
 // Function to fetch data from Riot API
 function fetchDataFromRiotAPI(endpoint) {
-    const url = `${endpoint}?api_key=${apiKey}`;
+    const url = `${endpoint}?api_key=${riotApiKey}`;
 
     return fetch(url)
         .then(response => {
