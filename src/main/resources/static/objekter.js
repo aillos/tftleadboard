@@ -7,6 +7,7 @@ $(function(){
 
 let riotApiKey = "";
 
+
 function fetchAPI (){
     fetch('/api/riot-key')
         .then(response => response.text())
@@ -55,7 +56,8 @@ function createDivs(summonerIds) {
         wr.setAttribute("id","wr"+(index+1));
         const rank = document.createElement('p');
         rank.style.display = 'inline-block';
-        rank.style.marginRight = '-20px';
+        rank.style.marginRight = '-10px';
+        rank.textContent="Rank: "
         const pRank = document.createElement('p');
         pRank.setAttribute("id","rank"+(index+1));
         pRank.setAttribute("class", "rank");

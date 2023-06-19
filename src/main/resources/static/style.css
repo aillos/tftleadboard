@@ -28,11 +28,56 @@
 .players {
     color: white;
     font-weight: normal;
-    align-self: center;
     text-align: center;
-    margin-bottom: 30px;
-    margin: 0 auto; /* Updated */
+    margin-right: 830px;
+    margin-left: auto;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Add this property to horizontally center the section */
 }
+
+.players.hovered {
+    /* Specify the styles for the hover effect */
+    background-color: #3e4044;
+    /* Add other styles as needed */
+}
+
+
+.image-button{
+    border-radius: 2px;
+    width:105px;
+    margin-right: 655px;
+    margin-left: auto;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Add this property to horizontally center the section */
+    vertical-align: middle;
+    outline: none; /* Remove the outline */
+    border: 0; /* Remove the border */
+    cursor: pointer;
+}
+
+.image-button:hover {
+    /*box-shadow: 1px 1px 1px #a49c5a;; /* Add box-shadow to create an offset outline */
+    /*box-shadow: 1px 1px 2px 1px rgba(114, 107, 72, 0.69);*/
+}
+
+.image-button > img {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 3px;
+}
+
+.image-button > p {
+    margin-left: 5px; /* Add a small left margin for spacing */
+    display: inline-block; /* Display as inline-block */
+    vertical-align: middle; /* Align the text vertically in the middle */
+    line-height: 18px; /* Set the line-height equal to the height of the image */
+}
+
+
 
 
 .header {
@@ -65,7 +110,7 @@
     height: 180px;
     width: 450px;
     background-color: #3e4044;
-    margin: 20px;
+    margin: 10px;
 }
 
 .player.even {
@@ -83,7 +128,7 @@
 .player-info > p {
     background-color:#3e4044;
     font-weight: bold;
-    margin-left: 25px;
+    margin-left: 15px;
     font-size: 14px;
     margin-top:6px;
     margin-bottom: 5px;
@@ -100,7 +145,7 @@
     color: #e1d781;
     background-color: #3e4044;
     margin-top: 10px;
-    margin-left: 25px;
+    margin-left: 15px;
     width:200px;
     margin-bottom: 0; /* Remove the bottom margin */
 }
@@ -108,22 +153,10 @@
 .player-info > .summoner-icon {
     position: absolute;
     top: 50%;
-    right: -80px; /* Adjust the right value for horizontal positioning */
+    right: -90px; /* Adjust the right value for horizontal positioning */
     transform: translateY(-50%);
     width: 150px; /* Adjust the width for the desired icon size */
     height: 150px; /* Adjust the height for the desired icon size */
-}
-
-.update{
-    color: #e1d781;
-    align-self: center;
-    width:200px;
-    height:30px;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-.update:hover {
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .rank{
