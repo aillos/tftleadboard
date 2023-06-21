@@ -26,7 +26,9 @@ const summonerIds = [
     'Zi7gJ-YswU-3UW_9Lxc0B5AFymZzfsQN7yw7RaMtLjtnmxM',
     'BSqMSmCu2uBLdI_1_rSqLVyakMF4u5Hnwr7Le2JlHE0sEcTq',
     '4B22JkbZTUImpYIXYgXZj77YykA_3F_g-HHtSbS64ImNpSPR',
-    'f3z5geiLxUXGyG-_-zJ8RD-KZjxWbzME5tQS6BfUsL6SqtA'
+    'f3z5geiLxUXGyG-_-zJ8RD-KZjxWbzME5tQS6BfUsL6SqtA',
+    'GXIJ0U9ERBONo1nQOvCbb8dzNY6fITwimULmtVbV4OHfGe0',
+    'XmClKMQ0Gbwyfk5MCf7hT8sFXztYVXO2cusJACdgvZffMO8'
 ];
 
 function createDivs(summonerIds) {
