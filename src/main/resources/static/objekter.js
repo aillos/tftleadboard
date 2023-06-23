@@ -1,6 +1,6 @@
 
 $(function(){
-    createDivs(summonerIds);
+    getAllSummonerIds();
     getAll();
     fetchAPI();
 });
@@ -19,17 +19,34 @@ function fetchAPI (){
         });
 }
 
+let summonerIds = null;
+let isSummonerIdsLoaded = false;
 
-const summonerIds = [
-    'j2kZ6bdKhnsvdD7ZycyXrplJ3a70d7lsEX1sFDQEllcyhQ0',
-    'NJhqW6YOTn82waWKj-4HG6GRRxZRfEnHqfi0SxFMAN9kWfk',
-    'Zi7gJ-YswU-3UW_9Lxc0B5AFymZzfsQN7yw7RaMtLjtnmxM',
-    'BSqMSmCu2uBLdI_1_rSqLVyakMF4u5Hnwr7Le2JlHE0sEcTq',
-    '4B22JkbZTUImpYIXYgXZj77YykA_3F_g-HHtSbS64ImNpSPR',
-    'f3z5geiLxUXGyG-_-zJ8RD-KZjxWbzME5tQS6BfUsL6SqtA',
-    'GXIJ0U9ERBONo1nQOvCbb8dzNY6fITwimULmtVbV4OHfGe0',
-    'XmClKMQ0Gbwyfk5MCf7hT8sFXztYVXO2cusJACdgvZffMO8'
-];
+function getAllSummonerIds() {
+    if (summonerIds !== null && isSummonerIdsLoaded) {
+        createDivs(summonerIds);
+        console.log(summonerIds);
+        return;
+    }
+
+    const cachedSummonerIds = localStorage.getItem('summonerIds');
+    if (cachedSummonerIds) {
+        summonerIds = JSON.parse(cachedSummonerIds);
+        isSummonerIdsLoaded = true;
+        createDivs(summonerIds);
+        console.log(summonerIds);
+        return;
+    }
+
+    $.get("/getAllSummonerIds", function(data) {
+        summonerIds = data;
+        isSummonerIdsLoaded = true;
+        localStorage.setItem('summonerIds', JSON.stringify(summonerIds));
+        createDivs(summonerIds);
+        console.log(summonerIds);
+    });
+}
+
 
 function createDivs(summonerIds) {
     summonerIds.forEach((summonerId, index) => {
@@ -117,8 +134,6 @@ function addExistingSummoners() {
                         .then(data => {
                             if (data) {
                                 const { id, profileIconId } = data;
-
-                                // Store the retrieved values as const variables
                                 const storedSummonerId = id;
                                 const storedSummonerIcon = profileIconId;
 
@@ -135,14 +150,12 @@ function addExistingSummoners() {
 
                                 $.post("/update", Summoner, function () {
                                     getAll();
-                                    window.location.href = "/";
                                 });
                             } else {
                                 console.log('No summoner data found for summoner ID:', summonerId);
                             }
                         })
                         .catch(error => {
-                            // Handle any errors that occurred during the fetch
                             console.error('Error:', error);
                         });
                 } else {
@@ -150,7 +163,6 @@ function addExistingSummoners() {
                 }
             })
             .catch(error => {
-                // Handle any errors that occurred during the fetch
                 console.error('Error:', error);
             });
     });

@@ -9,8 +9,9 @@ public class Summoner {
     private String summonerId;
     private int wins;
     private int losses;
+    private String puuid;
 
-    public Summoner(String summonerName, String rank, String tier, int lp, int summonerIcon, String summonerId, int wins, int losses) {
+    public Summoner(String summonerName, String rank, String tier, int lp, int summonerIcon, String summonerId, int wins, int losses, String puuid) {
         this.summonerName = summonerName;
         this.rank = rank;
         this.tier = tier;
@@ -19,6 +20,7 @@ public class Summoner {
         this.summonerId = summonerId;
         this.wins=wins;
         this.losses=losses;
+        this.puuid=puuid;
     }
 
     public Summoner() {
@@ -88,5 +90,13 @@ public class Summoner {
 
     public void setLosses(int losses) {
         this.losses = losses;
+    }
+
+    public String getPuuid() {
+        return puuid;
+    }
+
+    public void setPuuid(String puuid) {
+        this.puuid = puuid;
     }
 }

@@ -33,4 +33,9 @@ public class Controller {
         repo.deleteAllSummoner();
     }
 
+    @GetMapping("/getAllSummonerIds")
+    public List<String> getAllSummonerIds() {
+        return repo.getAllSummonerIds();
+    }
+
 }

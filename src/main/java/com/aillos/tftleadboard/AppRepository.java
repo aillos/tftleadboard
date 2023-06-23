@@ -55,4 +55,14 @@ public class AppRepository {
         String sql = "DELETE FROM Summoner";
         db.update(sql);
     }
+    public List<String> getAllSummonerIds() {
+        String sql = "SELECT summonerId FROM Summoner";
+        try {
+            return db.queryForList(sql, String.class);
+        } catch (Exception e) {
+            logger.error("Feil i hent alle summoner IDs " + e);
+            return null;
+        }
+    }
+
 }
