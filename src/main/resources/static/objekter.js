@@ -98,7 +98,7 @@ function handleClick(elementId) {
     const summonerNameElement = document.getElementById(elementId);
     const clickedValue = summonerNameElement.textContent;
     const result = clickedValue.substr(clickedValue.indexOf('.') + 2);
-    window.location.href = 'matchhistory.html';
+    window.location.href = 'matchhistory';
     insertMatch(result);
 }
 
