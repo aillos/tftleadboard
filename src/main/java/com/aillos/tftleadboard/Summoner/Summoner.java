@@ -1,4 +1,4 @@
-package com.aillos.tftleadboard;
+package com.aillos.tftleadboard.Summoner;
 
 public class Summoner {
     private String summonerName;

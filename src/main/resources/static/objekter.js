@@ -25,7 +25,6 @@ let isSummonerIdsLoaded = false;
 function getAllSummonerIds() {
     if (summonerIds !== null && isSummonerIdsLoaded) {
         createDivs(summonerIds);
-        console.log(summonerIds);
         return;
     }
 
@@ -34,7 +33,6 @@ function getAllSummonerIds() {
         summonerIds = JSON.parse(cachedSummonerIds);
         isSummonerIdsLoaded = true;
         createDivs(summonerIds);
-        console.log(summonerIds);
         return;
     }
 
@@ -43,7 +41,6 @@ function getAllSummonerIds() {
         isSummonerIdsLoaded = true;
         localStorage.setItem('summonerIds', JSON.stringify(summonerIds));
         createDivs(summonerIds);
-        console.log(summonerIds);
     });
 }
 
@@ -52,6 +49,7 @@ function createDivs(summonerIds) {
     summonerIds.forEach((summonerId, index) => {
         const player = document.createElement('div');
         player.setAttribute("class", "player");
+        player.setAttribute("onclick", "handleClick('summoner"+(index+1)+"')");
         player.classList.add('player');
         if ((index+1) % 2 === 0) {
             player.classList.add('even');
@@ -96,8 +94,17 @@ function createDivs(summonerIds) {
     });
 }
 
+function handleClick(elementId) {
+    const summonerNameElement = document.getElementById(elementId);
+    const clickedValue = summonerNameElement.textContent;
+    const result = clickedValue.substr(clickedValue.indexOf('.') + 2);
+    window.location.href = 'matchhistory.html';
+    insertMatch(result);
+}
+
+
 function fetchDataFromRiotAPI(endpoint) {
-    const url = `${endpoint}?api_key=${riotApiKey}`;
+    const url = `${endpoint}api_key=${riotApiKey}`;
 
     return fetch(url)
         .then(response => {
@@ -112,9 +119,32 @@ function fetchDataFromRiotAPI(endpoint) {
 }
 
 
+function insertMatch(clickedValue){
+    const summonerName=clickedValue;
+    $.get("/getPuuid", { summonerName: summonerName }, function (data) {
+        const puuid = data;
+        const endpoint = `https://europe.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=20&`;
+        fetchDataFromRiotAPI(endpoint)
+            .then(data => {
+                if (data.length > 0) {
+                    const matchIds = data;
+                    const Matches = {
+                        matchIds: matchIds,
+                        puuid: puuid,
+                    };
+                    $.post("/updateMatches", Matches, function () {
+                        console.log(`Updated matches for summoner ${clickedValue}`);
+
+                    });
+                }
+            })
+    })
+
+}
+
 function addExistingSummoners() {
     summonerIds.forEach(summonerId => {
-        const endpoint = `https://euw1.api.riotgames.com/tft/league/v1/entries/by-summoner/${summonerId}`;
+        const endpoint = `https://euw1.api.riotgames.com/tft/league/v1/entries/by-summoner/${summonerId}?`;
         fetchDataFromRiotAPI(endpoint)
             .then(data => {
                 if (data.length > 0) {
@@ -129,7 +159,7 @@ function addExistingSummoners() {
                     const storedTier = tier;
 
 
-                    const endpoint2 = `https://euw1.api.riotgames.com/tft/summoner/v1/summoners/${summonerId}`;
+                    const endpoint2 = `https://euw1.api.riotgames.com/tft/summoner/v1/summoners/${summonerId}?`;
                     fetchDataFromRiotAPI(endpoint2)
                         .then(data => {
                             if (data) {

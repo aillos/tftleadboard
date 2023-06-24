@@ -1,4 +1,4 @@
-package com.aillos.tftleadboard;
+package com.aillos.tftleadboard.Summoner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AppRepository {
+public class SummonerRepository {
     @Autowired
     private JdbcTemplate db;
 
-    private Logger logger = LoggerFactory.getLogger(AppRepository.class);
+    private Logger logger = LoggerFactory.getLogger(SummonerRepository.class);
 
     public boolean saveSummoner(Summoner Summoner){
         String sql = "INSERT INTO Summoner (summonerName, rank, tier, lp, summonerIcon, summonerId, wins, losses) VALUES (?,?,?,?,?,?,?,?)";
@@ -51,6 +51,7 @@ public class AppRepository {
             return null;
         }
     }
+
     public void deleteAllSummoner (){
         String sql = "DELETE FROM Summoner";
         db.update(sql);
@@ -64,5 +65,15 @@ public class AppRepository {
             return null;
         }
     }
+    public String getPuuid(String summonerName) {
+        String sql = "SELECT puuid FROM Summoner WHERE summonerName=?";
+        try {
+            return db.queryForObject(sql, String.class, summonerName);
+        } catch (Exception e) {
+            logger.error("Feil i hent alle summoner IDs " + e);
+            return null;
+        }
+    }
+
 
 }
