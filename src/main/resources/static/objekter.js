@@ -5,6 +5,8 @@ $(function(){
     fetchAPI();
 });
 
+
+
 let riotApiKey = "";
 
 
@@ -98,8 +100,10 @@ function handleClick(elementId) {
     const summonerNameElement = document.getElementById(elementId);
     const clickedValue = summonerNameElement.textContent;
     const result = clickedValue.substr(clickedValue.indexOf('.') + 2);
-    window.location.href = 'matchhistory';
-    insertMatch(result);
+    //insertMatch(result);
+    const url = 'matchhistory?data=' + encodeURIComponent(result);
+    window.location.href = url;
+
 }
 
 
@@ -123,7 +127,7 @@ function insertMatch(clickedValue){
     const summonerName=clickedValue;
     $.get("/getPuuid", { summonerName: summonerName }, function (data) {
         const puuid = data;
-        const endpoint = `https://europe.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=20&`;
+        const endpoint = `https://europe.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&`;
         fetchDataFromRiotAPI(endpoint)
             .then(data => {
                 if (data.length > 0) {
@@ -177,9 +181,10 @@ function addExistingSummoners() {
                                     wins: storedWins,
                                     losses: storedLosses,
                                 };
-
+                                console.log(Summoner);
                                 $.post("/update", Summoner, function () {
                                     getAll();
+                                    window.location.href="/";
                                 });
                             } else {
                                 console.log('No summoner data found for summoner ID:', summonerId);

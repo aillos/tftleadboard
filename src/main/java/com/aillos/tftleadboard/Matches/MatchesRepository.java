@@ -39,4 +39,13 @@ public class MatchesRepository {
         }
 
     }
+    public String getMatchIds(String summonerName) {
+        String sql = "SELECT matchIds FROM Matches WHERE summonerName=?";
+        try {
+            return db.queryForObject(sql, String.class, summonerName);
+        } catch (Exception e) {
+            logger.error("Feil i hent alle matchIds " + e);
+            return null;
+        }
+    }
 }

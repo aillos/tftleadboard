@@ -1,0 +1,46 @@
+package com.aillos.tftleadboard.MatchHistory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class MatchRepository {
+    @Autowired
+    private JdbcTemplate db;
+
+    private Logger logger = LoggerFactory.getLogger(MatchRepository.class);
+
+    public boolean saveMatch(Match match) {
+        String sql = "INSERT INTO MatchHistories (matchId, puuid, tactician, units, traits, placement, level, mode, augments) VALUES (?,?,?,?,?,?,?,?,?)";
+        try {
+            db.update(sql, match.getMatchId(), match.getPuuid(), match.getTactician(), match.getUnits(), match.getTraits(), match.getPlacement(), match.getLevel(), match.getMode(), match.getAugments());
+            return true;
+        } catch (Exception e) {
+            logger.error("Feil i lagre summoner " + e);
+            return false;
+        }
+    }
+
+
+    public void deleteAllMatches(String puuid) {
+        String sql = "DELETE FROM MatchHistories WHERE puuid=?";
+        db.update(sql, puuid); // Add the puuid parameter to the method call
+    }
+
+
+    public boolean updateMatch(Match Match) {
+        String sql = "UPDATE MatchHistories SET matchId=?, mode=?, tactician=?, units=?, traits=?, placement=?, level=? WHERE puuid=?";
+        try {
+            db.update(sql,Match.getMatchId(),Match.getPuuid(),Match.getTactician(),Match.getUnits(),Match.getTraits(), Match.getLevel(), Match.getPlacement(), Match.getMode(), Match.getAugments());
+            return true;
+        } catch (Exception e) {
+            logger.error("Feil i lagre summoner " + e);
+            return false;
+        }
+    }
+
+
+}
