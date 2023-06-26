@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    background-color: #2e2e33;
+    background-color: #1d1d1d;
     color:white;
 }
 
@@ -14,7 +14,7 @@
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     align-items: center;
-    background-color: #2e2e33;
+    background-color: #1d1d1d;
     color: white;
     width: 100%;
 }
@@ -53,11 +53,14 @@
     outline: none;
     border: 0; /
     cursor: pointer;
+    border: 2px solid #1d1d1d;
+    border-radius: 10px;
 }
 
 .image-button:hover {
-    /*box-shadow: 1px 1px 1px #a49c5a;; /* Add box-shadow to create an offset outline */
-    /*box-shadow: 1px 1px 2px 1px rgba(114, 107, 72, 0.69);*/
+    border: 2px solid #424040;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .image-button > img {
@@ -81,9 +84,20 @@
     position: relative;
     height: 180px;
     width: 450px;
-    background-color: #3e4044;
+    background-color: #1d1d1d;
     margin: 10px;
+    border: 2px solid #424040;
+    border-radius: 10px;
+    overflow: hidden; /* Add this property */
 }
+
+.player:hover{
+    cursor: pointer;
+
+}
+
+
+
 
 .player.even {
     justify-self: start;
@@ -94,7 +108,7 @@
 }
 
 .player-info > p {
-    background-color:#3e4044;
+    background-color:#1d1d1d;
     font-weight: bold;
     margin-left: 15px;
     font-size: 14px;
@@ -104,14 +118,14 @@
 
 .player-info {
     text-align: left;
-    background-color: #3e4044;
+    background-color: #1d1d1d;
     position: relative;
     padding: 5px;
 }
 
 .player-info > h2 {
     color: #e1d781;
-    background-color: #3e4044;
+    background-color: #1d1d1d;
     margin-top: 10px;
     margin-left: 15px;
     width:200px;

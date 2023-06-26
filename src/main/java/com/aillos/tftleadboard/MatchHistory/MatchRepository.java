@@ -47,10 +47,10 @@ public class MatchRepository {
     }
 
     public List<Match> getAllMatches(String puuid){
-        String sql = "SELECT * FROM MatchHistories WHERE puuid=?";
+        String sql = "SELECT * FROM MatchHistories WHERE puuid=? ORDER BY matchId DESC";
 
         try{
-            return db.query(sql,new BeanPropertyRowMapper<>(Match.class));
+            return db.query(sql,new BeanPropertyRowMapper<>(Match.class), puuid);
 
         }
         catch(Exception e){

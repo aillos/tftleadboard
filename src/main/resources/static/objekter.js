@@ -101,14 +101,16 @@ function handleClick(elementId) {
     const clickedValue = summonerNameElement.textContent;
     const result = clickedValue.substr(clickedValue.indexOf('.') + 2);
     const url = 'matchhistory?data=' + encodeURIComponent(result);
+
     insertMatch(result)
         .then(() => {
-            window.location.href = url;
+           window.location.href = url;
         })
         .catch(error => {
             console.log('Error inserting match:', error);
         });
 }
+
 
 
 function fetchDataFromRiotAPI(endpoint) {
@@ -143,6 +145,7 @@ function insertMatch(clickedValue) {
                         };
                         $.post("/updateMatches", Matches, function () {
                             console.log(`Updated matches for summoner ${clickedValue}`);
+                            sessionStorage.setItem('puuid', puuid);
                             resolve(); // Resolve the promise after successful match update
                         })
                             .fail(error => {
@@ -201,14 +204,13 @@ function addExistingSummoners() {
                                     window.location.href="/";
                                 });
                             } else {
-                                console.log('No summoner data found for summoner ID:', summonerId);
                             }
                         })
                         .catch(error => {
                             console.error('Error:', error);
                         });
                 } else {
-                    console.log('No league entries found for summoner ID:', summonerId);
+
                 }
             })
             .catch(error => {

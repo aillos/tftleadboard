@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    background-color: #2e2e33;
+    background-color: #1d1d1d;
     color:white;
 }
 
@@ -12,13 +12,13 @@
     align-self: center;
     align-content: center;
     width: 100%;
-    background-color: #2e2e33;
+    background-color: #1d1d1d;
 }
 .headLogo {
     display: flex; /* Add display flex */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
-    background-color: #2e2e33;
+    background-color: #1d1d1d;
     height: 200px;
 }
 

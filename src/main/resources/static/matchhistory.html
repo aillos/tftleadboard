@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>Match History</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./matchhistory.js"></script>
+    <script src="./matchhistory.js" data-base-url="./"></script>
+
     <link rel="stylesheet" href="topsection.css">
     <link rel="stylesheet" href="matchhistory.css">
     <link rel = "icon" href =
@@ -19,11 +20,21 @@
     </div>
 </div>
 </div>
-<div class="matchhistory border" id="matchhistory">
+<div class="matchhistory" id="matchhistory">
+    <button class="image-button" onclick=loadMatches()>
+        <img src="icons/refresh.png" alt="Refresh" style="display: inline-block">
+        <p style="display: inline-block">Refresh</p>
+    </button>
 
 </div>
-<button id="tst" onclick="addMatch()">HELLOHELLOHELLO</button>
+<!--<button id="tst" onclick="addMatch()">HELLOHELLOHELLO</button>
+<button id="loadButton" onclick="loadMatches()">Load Matches</button>
+
 <div id="test"></div>
 <div id="testingTable"></div>
+<img src="./tftItems/TFT5_Item_IonicSparkRadiant.png">
+<img src="./championIcons/Leona.png">
+<img src="./tftTacticians/Tooltip_ChibiTeemo_Devil_Devil1_Tier1.CHIBI_Teemo_Devil.png">
+<img src="./tftAugments/TFT9_Augment_GiftsFromTheFallen.png"> -->
 </body>
 </html>

@@ -1,8 +1,11 @@
+
+
+
 $(function() {
-    test();
     fetchAPI();
     getMatchIds(data);
     getPuuid(data);
+    createDivs(sessionStorage.getItem('puuid'));
 });
 
 const queryParams = new URLSearchParams(window.location.search);
@@ -11,6 +14,7 @@ let matchIds = null;
 let isMatchIdsLoaded = false;
 let puuid;
 let riotApiKey = "";
+
 
 function fetchDataFromRiotAPI(endpoint) {
     const url = `${endpoint}api_key=${riotApiKey}`;
@@ -42,7 +46,7 @@ async function getMatchIds(summonerName) {
     try {
         const response = await $.get("/getMatchIds", { summonerName: summonerName });
         matchIds = response.split(",");
-        createDivs(matchIds);
+        return matchIds;
     } catch (error) {
         console.error('Error:', error);
     }
@@ -51,102 +55,158 @@ async function getMatchIds(summonerName) {
 function test() {
     document.getElementById("test").textContent = data;
 }
+function createDivs(puuid) {
 
-function createDivs(matchIds) {
-    matchIds.forEach((matchId, index) => {
-        const match = document.createElement('div');
-        match.setAttribute("class", "match-entry border");
-        match.classList.add('match');
-        const placementIcon = document.createElement('div');
-        placementIcon.setAttribute("class", "placement-icon");
-        placementIcon.textContent = "1st";
-        match.appendChild(placementIcon);
+    for (let i = 0; i < 10; i++) {
 
-        const championIcons = document.createElement('div');
-        championIcons.setAttribute("class", "champion-icons");
+        // Retrieve the match details from the database
+        fetch(`/getAllMatches?puuid=${puuid}`)
+            .then(response => response.json())
+            .then(matches => {
+                if (matches.length > 0) {
 
-        const championIcon1 = document.createElement('img');
-        championIcon1.setAttribute("src", "./championIcons/KSante.png");
-        championIcon1.setAttribute("alt", "Champion Icon");
-        championIcons.appendChild(championIcon1);
+                    const match = matches[i];
 
-        const championIcon2 = document.createElement('img');
-        championIcon2.setAttribute("src", "./championIcons/Leona.png");
-        championIcon2.setAttribute("alt", "Champion Icon");
-        championIcons.appendChild(championIcon2);
+                    const matchDiv = document.createElement('div');
+                    matchDiv.setAttribute("class", "match-entry");
 
-// Add more champion icons as needed
+                    const placementIcon = document.createElement('div');
+                    placementIcon.setAttribute("class", "placement-icon");
+                    const x = parseInt(match.placement);
+                    if (x===1){
+                        placementIcon.textContent = x + "st";
+                        matchDiv.style.border = "2px solid #ffb93b";
+                        placementIcon.style.backgroundColor="#ffb93b";
+                    } else if (x===2){
+                        placementIcon.textContent = x + "nd";
+                        matchDiv.style.border = "2px solid #c440da";
+                        placementIcon.style.backgroundColor="#c440da";
+                    } else if (x===3){
+                        placementIcon.textContent = x + "rd";
+                        matchDiv.style.border = "2px solid #207ac7";
+                        placementIcon.style.backgroundColor="#207ac7";
+                    } else if (x===4){
+                        placementIcon.textContent = x + "th";
+                        matchDiv.style.border = "2px solid #11b288";
+                        placementIcon.style.backgroundColor="#11b288";
+                    } else {
+                        placementIcon.textContent = x + "th";
+                        matchDiv.style.border = "2px solid #808080";
+                        placementIcon.style.backgroundColor="#808080";
+                    }
+                    placementIcon.textContent = match.placement + "th";
+                    matchDiv.style.borderRadius = "10px";
+                    matchDiv.classList.add('match');
+                    matchDiv.appendChild(placementIcon);
 
-        match.appendChild(championIcons);
+                    console.log(match.tactician);
 
-        const itemIcons = document.createElement('div');
-        itemIcons.setAttribute("class", "item-icons");
+                    const tactician = JSON.parse(match.tactician); // Parse the tactician object
+                    const littleLegend = document.createElement('img');
+                    littleLegend.setAttribute("class", "tactician");
+                    littleLegend.setAttribute("src", `./tftTacticians/${tactician.image}.png`);
+                    littleLegend.setAttribute("alt", tactician.name);
+                    matchDiv.appendChild(littleLegend);
 
-        const itemIcon1 = document.createElement('img');
-        itemIcon1.setAttribute("src", "./tftItems/TFT4_Item_OrnnAnimaVisage.png");
-        itemIcon1.setAttribute("alt", "Item Icon");
-        itemIcons.appendChild(itemIcon1);
+                    const augmentIcons = document.createElement('div');
+                    augmentIcons.setAttribute("class", "augment-icons");
 
-        const itemIcon2 = document.createElement('img');
-        itemIcon2.setAttribute("src", "./tftItems/TFT5_Item_IonicSparkRadiant.png");
-        itemIcon2.setAttribute("alt", "Item Icon");
-        itemIcons.appendChild(itemIcon2);
+                    let augmentsString = match.augments.trim(); // Trim the string to remove whitespace
+                    augmentsString = augmentsString.replace(/\\"/g, '"'); // Remove additional backslashes
 
-// Add more item icons as needed
+                    try {
+                        if (augmentsString.length !== 0) {
+                            let augments = JSON.parse(augmentsString);
 
-        match.appendChild(itemIcons);
+                            if (augments.length === 2) {
+                                // Add an additional entry as the first element
+                                augments.unshift({
+                                    id: "missing_legend",
+                                    name: "Legend Augment",
+                                    image: "Missing-T2.png"
+                                });
+                            }
 
-        const traitIcons = document.createElement('div');
-        traitIcons.setAttribute("class", "trait-icons");
+                            for (let i = 0; i < augments.length; i++) {
+                                const augment = augments[i];
+                                const augmentIcon = document.createElement('img');
+                                augmentIcon.setAttribute("src", `./tftAugments/${augment.image}`);
+                                augmentIcon.setAttribute("alt", augment.name);
+                                augmentIcons.appendChild(augmentIcon);
+                            }
+                        }
+                    } catch (error) {
+                        console.error("Error parsing augments:", error.message);
+                        console.error("Error position:", error.message.slice(error.message.lastIndexOf(' ') + 1));
+                    }
 
-        const traitIcon1 = document.createElement('img');
-        traitIcon1.setAttribute("src", "./static/tftTraits/Trait_Icon_9_Noxus.TFT_Set9.png");
-        traitIcon1.setAttribute("alt", "Trait Icon");
-        traitIcons.appendChild(traitIcon1);
+                    matchDiv.appendChild(augmentIcons);
 
-        const traitIcon2 = document.createElement('img');
-        traitIcon2.setAttribute("src", "./icons/tft.png");
-        traitIcon2.setAttribute("alt", "Trait Icon");
-        traitIcons.appendChild(traitIcon2);
+                    const championIcons = document.createElement('div');
+                    championIcons.setAttribute("class", "champion-icons");
 
-// Add more trait icons as needed
+                    let units = match.units.split("**");
 
-        match.appendChild(traitIcons);
+                    console.log(units);
+                    for (let i=0; i<units.length-1;i++){
+                        let unitsJSON = JSON.parse(units[i]);
 
-        const matchDetails = document.createElement('div');
-        matchDetails.setAttribute("class", "match-details");
+                        const championIcon = document.createElement('img');
+                        championIcon.setAttribute("src", `./championIcons/`+unitsJSON.name+`.png`);
+                        championIcon.setAttribute("alt", unitsJSON.name);
+                        if (unitsJSON.cost === 4) {
+                            championIcon.style.border = "2px solid #c440da";
+                        } else if (unitsJSON.cost === 2){
+                            championIcon.style.border = "2px solid #207ac7";
+                        } else if (unitsJSON.cost === 1){
+                            championIcon.style.border = "2px solid #11b288";
+                        } else if (unitsJSON.cost === 6){
+                            championIcon.style.border = "2px solid #ffb93b";
+                        } else if (unitsJSON.cost === 0){
+                            championIcon.style.border = "2px solid #808080";
+                        } else {
+                            championIcon.style.border = "2px solid black";
+                        }
 
-        const rounds = document.createElement('span');
-        rounds.setAttribute("class", "rounds");
-        rounds.textContent = "Round 25";
-        matchDetails.appendChild(rounds);
+                        championIcon.style.borderRadius = "10%";
+                        championIcons.appendChild(championIcon);
+                    }
 
-        const health = document.createElement('span');
-        health.setAttribute("class", "health");
-        health.textContent = "HP: 38";
-        matchDetails.appendChild(health);
+                    matchDiv.appendChild(championIcons);
 
-        match.appendChild(matchDetails);
+                    // Set item icons
+                    const itemIcons = document.createElement('div');
+                    itemIcons.setAttribute("class", "item-icons");
 
-        const damage = document.createElement('div');
-        damage.setAttribute("class", "damage");
+                    matchDiv.appendChild(itemIcons);
 
-        const damageAmount = document.createElement('span');
-        damageAmount.setAttribute("class", "damage-amount");
-        damageAmount.textContent = "298";
-        damage.appendChild(damageAmount);
+                    // Set trait icons
+                    const traitIcons = document.createElement('div');
+                    traitIcons.setAttribute("class", "trait-icons");
 
-        const damageText = document.createElement('span');
-        damageText.setAttribute("class", "damage-text");
-        damageText.textContent = "Damage to Players";
-        damage.appendChild(damageText);
+                    if (match.traits && !Array.isArray(match.traits)) {
+                        const traitIcon = document.createElement('img');
+                        traitIcon.setAttribute("src", `./tftQueue/${match.traits.name}.png`);
+                        traitIcon.setAttribute("alt", "Trait Icon");
+                        traitIcons.appendChild(traitIcon);
+                    }
 
-        match.appendChild(damage);
+                    matchDiv.appendChild(traitIcons);
 
-        document.getElementById('matchhistory').appendChild(match);
+                    // Set match details
 
-        });
+                    document.getElementById('matchhistory').appendChild(matchDiv);
+                } else {
+                    console.error('No match found for the specified puuid');
+                }
+            })
+            .catch(error => {
+                console.error('Error retrieving match details:', error);
+            });
+    }
 }
+
+
 
 
 function getPuuid(summonerName) {
@@ -154,54 +214,128 @@ function getPuuid(summonerName) {
         puuid = data;
     })
 }
+function loadMatches() {
+    // Call getMatchIds to retrieve match IDs
+    getMatchIds(data)
+        .then(matchIds => {
+            console.log(matchIds);
+
+            $.get("/deleteAllMatches", { puuid: puuid }, function() {
+                console.log("Successfully deleted matches");
+            });
+
+            // Call addMatch for each retrieved match ID
+            matchIds.forEach((matchId) => {
+                addMatch(matchId);
+            });
+
+            // Wait for 3 seconds (adjust the delay as needed)
+            setTimeout(function() {
+                // Refresh the page
+                location.reload();
+            }, 500);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
 
 
-function addMatch() {
-    $.get("/deleteAllMatches", { puuid: puuid }, function() {
-        console.log("Successfully deleted matches");
-    });
 
-    matchIds.forEach(matchId => {
+
+function addMatch(matchId) {
         const endpoint = `https://europe.api.riotgames.com/tft/match/v1/matches/${matchId}?`;
-        const targetPuuid = puuid;
+        const targetPuuid = sessionStorage.getItem('puuid');
         fetchDataFromRiotAPI(endpoint)
             .then(data => {
                 const playerData = data.info.participants.find(participant => participant.puuid === targetPuuid);
                 const itemID = playerData.companion.item_ID;
 
-                // Fetch the JSON data
+                // Fetch the JSON data for tacticians
                 fetch('https://ddragon.leagueoflegends.com/cdn/13.12.1/data/en_US/tft-tactician.json')
                     .then(response => response.json())
                     .then(jsonData => {
-                        console.log(jsonData);
                         const tacticianId = findTacticianId(jsonData, itemID);
 
                         if (tacticianId) {
                             const tacticianEntry = jsonData.data[tacticianId];
-                            const tacticianImage = tacticianEntry.image; // Assign the image property as an object
+                            const tacticianImageFull = tacticianEntry.image.full;
+                            const tacticianImage = tacticianImageFull.substring(0, tacticianImageFull.lastIndexOf('.'));
                             const tacticianName = tacticianEntry.name;
+                            const unitData = playerData.units;
 
-                            const match = {
-                                matchId: matchId,
-                                puuid: puuid,
-                                tactician: "id:" + tacticianId + ", name:" + tacticianName + ", image:" + JSON.stringify(tacticianImage),
-                                placement: playerData.placement,
-                                level: playerData.level,
-                                traits: JSON.stringify(playerData.traits),
-                                units: JSON.stringify(playerData.units),
-                                mode: data.info.queue_id,
-                                augments: JSON.stringify(playerData.augments)
-                            };
+                            let champions = "";
 
-                            $.ajax({
-                                url: "/saveMatch",
-                                type: "POST",
-                                data: JSON.stringify(match),
-                                contentType: "application/json",
-                                success: function() {
-                                    console.log("Saved");
+                            for (let i = 0; i < unitData.length; i++) {
+                                const startIndex = unitData[i].character_id.indexOf("_");
+                                let substring = unitData[i].character_id.substr(startIndex + 1);
+                                if (substring.includes("Ryze")) {
+                                    substring = "Ryze";
                                 }
-                            })
+                                champions = champions + `{"name":"${substring}","items":${JSON.stringify(unitData[i].itemNames)},"cost":${unitData[i].rarity},"stars":${unitData[i].tier}}**`;
+                            }
+
+                            const traitData = playerData.traits;
+                            let synergies = "";
+                            for (let i = 0; i < traitData.length; i++) {
+                                const startIndex = traitData[i].name.indexOf("_");
+                                const substring = traitData[i].name.substr(startIndex + 1);
+                                synergies = synergies + "{\"name\":\"" + substring + "\",\"units\":" + traitData[i].num_units + ",\"style\":" + traitData[i].style + ",\"tier\":" + traitData[i].tier_current + "/" + traitData[i].tier_total + "}";
+                            }
+
+                            // Fetch the JSON data for augments
+                            fetch('https://ddragon.leagueoflegends.com/cdn/13.12.1/data/en_US/tft-augments.json')
+                                .then(response => response.json())
+                                .then(augmentData => {
+                                    const augments = playerData.augments.map(augmentId => {
+                                        const augment = augmentData.data[augmentId];
+                                        if (augment && augment.name) {
+                                            return {
+                                                id: augmentId,
+                                                name: augment.name,
+                                                image: augment.image.full
+                                            };
+                                        } else {
+                                            // Handle the case when augment or augment.name is undefined
+                                            console.log('Augment not found for ID:', augmentId);
+                                            return {
+                                                id: augmentId,
+                                                name: 'Unknown',
+                                                image: ''
+                                            };
+                                        }
+                                    });
+
+                                    const match = {
+                                        matchId: matchId,
+                                        puuid: puuid,
+                                        tactician: JSON.stringify({
+                                            id: tacticianId,
+                                            name: tacticianName,
+                                            image: tacticianImage
+                                        }),
+                                        placement: playerData.placement,
+                                        level: playerData.level,
+                                        traits: synergies,
+                                        units: champions,
+                                        mode: data.info.queue_id,
+                                        augments: JSON.stringify(augments)
+                                    };
+
+
+                                    $.ajax({
+                                        url: "/saveMatch",
+                                        type: "POST",
+                                        data: JSON.stringify(match),
+                                        contentType: "application/json",
+                                        success: function() {
+                                            console.log("Saved");
+                                        }
+                                    })
+                                        .catch(error => {
+                                            console.log('Error:', error);
+                                        });
+                                })
                                 .catch(error => {
                                     console.log('Error:', error);
                                 });
@@ -216,8 +350,8 @@ function addMatch() {
             .catch(error => {
                 console.log('Error:', error);
             });
-    });
 }
+
 
 
 
@@ -231,21 +365,5 @@ function findTacticianId(jsonData, itemID) {
             }
         }
     }
-    return null; // Tactician ID not found
-}
-
-
-
-
-
-function formaterMatch(Match) {
-    for (const [index, sum] of Match.entries()) {
-            document.getElementById("summoner" + (index + 1)).textContent = (index + 1) + ". " + sum.summonerName;
-            document.getElementById("summonerIcon" + (index + 1)).src = `http://ddragon.leagueoflegends.com/cdn/13.12.1/img/profileicon/` + sum.summonerIcon + `.png`;
-            document.getElementById("games" + (index + 1)).textContent = "Games played: " + (sum.wins + sum.losses);
-            document.getElementById("wins" + (index + 1)).textContent = "Top 4: " + sum.wins;
-            document.getElementById("losses" + (index + 1)).textContent = "Bot 4: " + sum.losses;
-            document.getElementById("wr" + (index + 1)).textContent = "Wr: " + Math.trunc(sum.wins / (sum.losses + sum.wins) * 100) + "%";
-            document.getElementById("rank" + (index + 1)).textContent = sum.tier + " " + sum.rank + " " + sum.lp + " LP";
-    }
+    return null;
 }
