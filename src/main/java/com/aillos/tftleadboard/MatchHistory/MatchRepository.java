@@ -1,10 +1,14 @@
 package com.aillos.tftleadboard.MatchHistory;
 
+import com.aillos.tftleadboard.Summoner.Summoner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class MatchRepository {
@@ -42,5 +46,17 @@ public class MatchRepository {
         }
     }
 
+    public List<Match> getAllMatches(String puuid){
+        String sql = "SELECT * FROM MatchHistories WHERE puuid=?";
+
+        try{
+            return db.query(sql,new BeanPropertyRowMapper<>(Match.class));
+
+        }
+        catch(Exception e){
+            logger.error("Feil i hent alle matches "+e);
+            return null;
+        }
+    }
 
 }

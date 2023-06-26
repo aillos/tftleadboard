@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background-color: #2e2e33;
+    color: white;
+}
+
+.matchhistory {
+    text-align: center;
+    background-color: #2e2e33;
+    color: white;
+    width: 100%;
+}
+
+.icons {
+
+}
+
+.border {
+    outline: 5px solid white;
+}
+
+.match {
+    color: white;
+    font-weight: normal;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px; /* Set a maximum width for each entry */
+    margin-bottom: 20px; /* Adjust the margin as needed */
+    height:100px;
+}
+
+.match-entry {
+    display: flex;
+    align-items: center;
+}
+
+.placement-icon {
+    background-color: #f2c94c;
+    color: #000;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+.champion-icons,
+.item-icons,
+.trait-icons {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.champion-icons img,
+.item-icons img,
+.trait-icons img {
+    width: 32px;
+    height: 32px;
+    margin-right: 4px;
+}
+
+.champion-icons img:first-child,
+.item-icons img:first-child,
+.trait-icons img:first-child {
+    margin-left: 0;
+}
+
+
+.match-details {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.rounds,
+.health {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.damage {
+    margin-left: 16px;
+}
+
+.damage-amount {
+    color: #e96a6a;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.damage-text {
+    color: #999;
+    font-size: 12px;
+}

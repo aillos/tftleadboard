@@ -100,10 +100,14 @@ function handleClick(elementId) {
     const summonerNameElement = document.getElementById(elementId);
     const clickedValue = summonerNameElement.textContent;
     const result = clickedValue.substr(clickedValue.indexOf('.') + 2);
-    //insertMatch(result);
     const url = 'matchhistory?data=' + encodeURIComponent(result);
-    window.location.href = url;
-
+    insertMatch(result)
+        .then(() => {
+            window.location.href = url;
+        })
+        .catch(error => {
+            console.log('Error inserting match:', error);
+        });
 }
 
 
@@ -123,28 +127,38 @@ function fetchDataFromRiotAPI(endpoint) {
 }
 
 
-function insertMatch(clickedValue){
-    const summonerName=clickedValue;
-    $.get("/getPuuid", { summonerName: summonerName }, function (data) {
-        const puuid = data;
-        const endpoint = `https://europe.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&`;
-        fetchDataFromRiotAPI(endpoint)
-            .then(data => {
-                if (data.length > 0) {
-                    const matchIds = data;
-                    const Matches = {
-                        matchIds: matchIds,
-                        puuid: puuid,
-                    };
-                    $.post("/updateMatches", Matches, function () {
-                        console.log(`Updated matches for summoner ${clickedValue}`);
-
-                    });
-                }
-            })
-    })
-
+function insertMatch(clickedValue) {
+    return new Promise((resolve, reject) => {
+        const summonerName = clickedValue;
+        $.get("/getPuuid", { summonerName: summonerName }, function (data) {
+            const puuid = data;
+            const endpoint = `https://europe.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=10&`;
+            fetchDataFromRiotAPI(endpoint)
+                .then(data => {
+                    if (data.length > 0) {
+                        const matchIds = data;
+                        const Matches = {
+                            matchIds: matchIds,
+                            puuid: puuid,
+                        };
+                        $.post("/updateMatches", Matches, function () {
+                            console.log(`Updated matches for summoner ${clickedValue}`);
+                            resolve(); // Resolve the promise after successful match update
+                        })
+                            .fail(error => {
+                                reject(error); // Reject the promise if there is an error in the match update
+                            });
+                    } else {
+                        resolve(); // Resolve the promise if no match IDs are found
+                    }
+                })
+                .catch(error => {
+                    reject(error); // Reject the promise if there is an error in fetching match IDs
+                });
+        });
+    });
 }
+
 
 function addExistingSummoners() {
     summonerIds.forEach(summonerId => {

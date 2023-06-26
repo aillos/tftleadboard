@@ -30,4 +30,8 @@ public class MatchController {
         repo.deleteAllMatches(puuid);
     }
 
+    @GetMapping("/getAllMatches")
+    public List<Match> getAllMatches(String puuid) {
+        return repo.getAllMatches(puuid);
+    }
 }
