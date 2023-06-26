@@ -152,6 +152,23 @@ function createDivs(puuid) {
                         let unitsJSON = JSON.parse(units[i]);
 
                         const championIcon = document.createElement('img');
+                        if (unitsJSON.name === "Vel'Koz"){
+                            championIcon.setAttribute("src", `./championIcons/Velkoz.png`);
+                        } else if (unitsJSON.name === "Kai'Sa"){
+                            championIcon.setAttribute("src", `./championIcons/Kaisa.png`);
+                        } else if (unitsJSON.name === "Kha'Zix"){
+                            championIcon.setAttribute("src", `./championIcons/Khazix.png`);
+                        } else if (unitsJSON.name === "Kog'Maw"){
+                            championIcon.setAttribute("src", `./championIcons/KogMaw.png`);
+                        } else if (unitsJSON.name === "Bel'Veth") {
+                            championIcon.setAttribute("src", `./championIcons/Belveth.png`);
+                        } else if (unitsJSON.name === "Cho'Gath"){
+                                championIcon.setAttribute("src", `./championIcons/Chogath.png`);
+                        } else if (unitsJSON.name === "Rek'Sai"){
+                            championIcon.setAttribute("src", `./championIcons/RekSai.png`);
+                        } else if (unitsJSON.name === "K'Sante"){
+                            championIcon.setAttribute("src", `./championIcons/KSante.png`);
+                        }
                         championIcon.setAttribute("src", `./championIcons/`+unitsJSON.name+`.png`);
                         championIcon.setAttribute("alt", unitsJSON.name);
                         if (unitsJSON.cost === 4) {
