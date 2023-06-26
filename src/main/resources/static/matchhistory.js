@@ -72,7 +72,7 @@ function createDivs(puuid) {
 
                     const placementIcon = document.createElement('div');
                     placementIcon.setAttribute("class", "placement-icon");
-                    const x = parseInt(match.placement);
+                    const x = match.placement;
                     if (x===1){
                         placementIcon.textContent = x + "st";
                         matchDiv.style.border = "2px solid #ffb93b";
@@ -99,7 +99,6 @@ function createDivs(puuid) {
                     matchDiv.classList.add('match');
                     matchDiv.appendChild(placementIcon);
 
-                    console.log(match.tactician);
 
                     const tactician = JSON.parse(match.tactician); // Parse the tactician object
                     const littleLegend = document.createElement('img');
@@ -147,7 +146,6 @@ function createDivs(puuid) {
 
                     let units = match.units.split("**");
 
-                    console.log(units);
                     for (let i=0; i<units.length-1;i++){
                         let unitsJSON = JSON.parse(units[i]);
 
@@ -197,18 +195,35 @@ function createDivs(puuid) {
 
                     matchDiv.appendChild(itemIcons);
 
-                    // Set trait icons
                     const traitIcons = document.createElement('div');
-                    traitIcons.setAttribute("class", "trait-icons");
+                    traitIcons.setAttribute('class', 'trait-icons');
 
-                    if (match.traits && !Array.isArray(match.traits)) {
-                        const traitIcon = document.createElement('img');
-                        traitIcon.setAttribute("src", `./tftQueue/${match.traits.name}.png`);
-                        traitIcon.setAttribute("alt", "Trait Icon");
-                        traitIcons.appendChild(traitIcon);
+                    if (match.traits && Array.isArray(match.traits)) {
+                        const maxTraitIconsPerRow = 6; // Maximum number of trait icons in a row
+                        const numTraits = match.traits.length;
+                        const numTraitRows = Math.ceil(numTraits / maxTraitIconsPerRow);
+
+                        for (let i = 0; i < numTraitRows; i++) {
+                            const traitIconsRow = document.createElement('div');
+                            traitIconsRow.setAttribute('class', 'trait-icons-row');
+
+                            const startIndex = i * maxTraitIconsPerRow;
+                            const endIndex = Math.min(startIndex + maxTraitIconsPerRow, numTraits);
+
+                            for (let j = startIndex; j < endIndex; j++) {
+                                console.log("HEI");
+                                const traitIcon = document.createElement('img');
+                                traitIcon.setAttribute('src', `./tftQueue/${match.traits[j].name}.png`);
+                                traitIcon.setAttribute('alt', 'Trait Icon');
+                                traitIconsRow.appendChild(traitIcon);
+                            }
+
+                            traitIcons.appendChild(traitIconsRow);
+                        }
                     }
 
                     matchDiv.appendChild(traitIcons);
+
 
                     // Set match details
 
@@ -250,7 +265,7 @@ function loadMatches() {
             setTimeout(function() {
                 // Refresh the page
                 location.reload();
-            }, 500);
+            }, 2000);
         })
         .catch(error => {
             console.error('Error:', error);

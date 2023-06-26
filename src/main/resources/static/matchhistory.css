@@ -73,33 +73,39 @@
     margin-left: 0;
 }
 
-
-.match-details {
+.trait-icons {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    margin-left: auto;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-.rounds,
-.health {
-    margin-right: 8px;
-    font-size: 14px;
+.trait-icons-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-.damage {
-    margin-left: 16px;
+.trait-icons img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
 }
 
-.damage-amount {
-    color: #e96a6a;
-    font-weight: bold;
-    font-size: 14px;
+.trait-icons-row:nth-child(even) img {
+    margin-top: 5px;
 }
 
-.damage-text {
-    color: #999;
-    font-size: 12px;
+.trait-icons-row:nth-child(odd) img {
+    margin-bottom: 5px;
 }
+
+
+
 .tactician {
     width: 80px; /* Adjust the width to the desired size */
     height: 80px; /* Adjust the height to the desired size */
