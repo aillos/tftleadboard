@@ -219,8 +219,9 @@ function createDivs(puuid) {
                             name="Heimerdinger Turret";
                         } else if (name.toLowerCase() === "thex"){
                             name="T-Hex";
+                        } else {
+                            championIcon.setAttribute("src", `./championIcons/` + unitsJSON.name + `.png`);
                         }
-                        championIcon.setAttribute("src", `./championIcons/`+unitsJSON.name+`.png`);
                         championIcon.style.borderRadius = "10%";
                         abbr.setAttribute("title", unitsJSON.name);
                         abbr.appendChild(championIcon);
