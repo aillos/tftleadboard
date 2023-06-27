@@ -58,12 +58,17 @@
 }
 
 .champion-icons img,
-.item-icons img,
-.trait-icons img,
 .augment-icons img{
     width: 40px;
     height: 40px;
     margin-right: 4px;
+}
+
+.item-icons img{
+    width:25px;
+    height:25px;
+    margin:2px;
+
 }
 
 .champion-icons img:first-child,
@@ -78,7 +83,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     margin-top: 10px;
 }
 
@@ -90,10 +95,10 @@
 }
 
 .trait-icons img {
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
-    border: 2px solid #fff;
+    border: 1px solid #000000;
 }
 
 .trait-icons-row:nth-child(even) img {

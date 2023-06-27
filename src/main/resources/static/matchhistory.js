@@ -170,17 +170,17 @@ function createDivs(puuid) {
                         championIcon.setAttribute("src", `./championIcons/`+unitsJSON.name+`.png`);
                         championIcon.setAttribute("alt", unitsJSON.name);
                         if (unitsJSON.cost === 4) {
-                            championIcon.style.border = "2px solid #c440da";
+                            championIcon.style.border = "3px solid #c440da";
                         } else if (unitsJSON.cost === 2){
-                            championIcon.style.border = "2px solid #207ac7";
+                            championIcon.style.border = "3px solid #207ac7";
                         } else if (unitsJSON.cost === 1){
-                            championIcon.style.border = "2px solid #11b288";
+                            championIcon.style.border = "3px solid #11b288";
                         } else if (unitsJSON.cost === 6){
-                            championIcon.style.border = "2px solid #ffb93b";
+                            championIcon.style.border = "3px solid #ffb93b";
                         } else if (unitsJSON.cost === 0){
-                            championIcon.style.border = "2px solid #808080";
+                            championIcon.style.border = "3px solid #808080";
                         } else {
-                            championIcon.style.border = "2px solid black";
+                            championIcon.style.border = "3px solid black";
                         }
 
                         championIcon.style.borderRadius = "10%";
@@ -195,36 +195,56 @@ function createDivs(puuid) {
 
                     matchDiv.appendChild(itemIcons);
 
+                    // Set trait icons
                     const traitIcons = document.createElement('div');
                     traitIcons.setAttribute('class', 'trait-icons');
 
-                    if (match.traits && Array.isArray(match.traits)) {
-                        const maxTraitIconsPerRow = 6; // Maximum number of trait icons in a row
-                        const numTraits = match.traits.length;
-                        const numTraitRows = Math.ceil(numTraits / maxTraitIconsPerRow);
+                    if (match.traits && typeof match.traits === 'string') {
+                        console.log(match.traits);
+                        const traitsArray = match.traits.split("**");
+                        console.log(traitsArray);
 
-                        for (let i = 0; i < numTraitRows; i++) {
-                            const traitIconsRow = document.createElement('div');
-                            traitIconsRow.setAttribute('class', 'trait-icons-row');
+                        const maxIconsPerRow = 5; // Maximum number of icons per row
+                        const totalRows = Math.ceil(traitsArray.length / maxIconsPerRow); // Calculate the total number of rows
 
-                            const startIndex = i * maxTraitIconsPerRow;
-                            const endIndex = Math.min(startIndex + maxTraitIconsPerRow, numTraits);
+                        const orderedTraits = [];
 
-                            for (let j = startIndex; j < endIndex; j++) {
-                                console.log("HEI");
+                        for (let j = 0; j < traitsArray.length - 1; j++) {
+                            console.log(traitsArray[j]);
+                            let traitJSON = JSON.parse(traitsArray[j]);
+
+                            const style = traitJSON.style;
+                            if (style > 0) {
+                                orderedTraits.push(traitJSON);
+                            }
+                        }
+
+                        orderedTraits.sort((a, b) => b.style - a.style); // Sort traits by style in descending order
+
+                        for (let i = 0; i < totalRows; i++) {
+                            const traitRow = document.createElement('div');
+                            traitRow.setAttribute('class', 'trait-row');
+
+                            for (let j = i * maxIconsPerRow; j < Math.min((i + 1) * maxIconsPerRow, orderedTraits.length); j++) {
+                                console.log(orderedTraits[j]);
                                 const traitIcon = document.createElement('img');
-                                traitIcon.setAttribute('src', `./tftQueue/${match.traits[j].name}.png`);
-                                traitIcon.setAttribute('alt', 'Trait Icon');
-                                traitIconsRow.appendChild(traitIcon);
+                                const name = orderedTraits[j].name;
+
+                                traitIcon.setAttribute('src', `./tftTraits/${name}.png`);
+                                traitIcon.setAttribute('alt', name);
+
+                                // Apply styles based on the style value
+                                const style = orderedTraits[j].style;
+                                traitIcon.style.backgroundColor = (style === 1) ? '#e0864f' : (style === 2) ? '#b6d0d2' : (style === 3) ? '#f2d670' : '#a9dad9'; // Example colors based on style value
+
+                                traitRow.appendChild(traitIcon);
                             }
 
-                            traitIcons.appendChild(traitIconsRow);
+                            traitIcons.appendChild(traitRow);
                         }
                     }
 
                     matchDiv.appendChild(traitIcons);
-
-
                     // Set match details
 
                     document.getElementById('matchhistory').appendChild(matchDiv);
@@ -312,7 +332,7 @@ function addMatch(matchId) {
                             for (let i = 0; i < traitData.length; i++) {
                                 const startIndex = traitData[i].name.indexOf("_");
                                 const substring = traitData[i].name.substr(startIndex + 1);
-                                synergies = synergies + "{\"name\":\"" + substring + "\",\"units\":" + traitData[i].num_units + ",\"style\":" + traitData[i].style + ",\"tier\":" + traitData[i].tier_current + "/" + traitData[i].tier_total + "}";
+                                synergies = synergies + `{"name":"${substring}","units":${JSON.stringify(traitData[i].num_units)},"style":${traitData[i].style}}**`;
                             }
 
                             // Fetch the JSON data for augments
