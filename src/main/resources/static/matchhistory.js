@@ -98,7 +98,6 @@ function createDivs(puuid) {
                         matchDiv.style.border = "2px solid #808080";
                         placementIcon.style.backgroundColor="#808080";
                     }
-                    placementIcon.textContent = match.placement + "th";
                     matchDiv.style.borderRadius = "10px";
                     matchDiv.classList.add('match');
                     matchDiv.appendChild(placementIcon);
