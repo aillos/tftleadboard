@@ -205,6 +205,7 @@ function createDivs(puuid) {
                             name="Cho'Gath";
                             championIcon.setAttribute("src", `./championIcons/Chogath.png`);
                         } else if (name.toLowerCase() === "jarvaniv"){
+                            championIcon.setAttribute("src", `./championIcons/` + unitsJSON.name + `.png`);
                             name="Jarvan IV";
                         } else if (name.toLowerCase() === "belveth"){
                             name="Bel'Veth";
@@ -216,8 +217,10 @@ function createDivs(puuid) {
                             name="K'Sante";
                             championIcon.setAttribute("src", `./championIcons/KSante.png`);
                         } else if (name.toLowerCase() === "heimerdingerturret"){
+                            championIcon.setAttribute("src", `./championIcons/` + unitsJSON.name + `.png`);
                             name="Heimerdinger Turret";
                         } else if (name.toLowerCase() === "thex"){
+                            championIcon.setAttribute("src", `./championIcons/` + unitsJSON.name + `.png`);
                             name="T-Hex";
                         } else {
                             championIcon.setAttribute("src", `./championIcons/` + unitsJSON.name + `.png`);
