@@ -52,6 +52,10 @@ async function getMatchIds(summonerName) {
     }
 }
 
+function homepage(){
+    window.location.href="/";
+}
+
 function test() {
     document.getElementById("test").textContent = data;
 }

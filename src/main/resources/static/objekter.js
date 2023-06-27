@@ -232,7 +232,9 @@ function deleteAll() {
     })
     window.location.href="/";
 }
-
+function homepage(){
+    window.location.href="/";
+}
 function save() {
     const Summoner = {
         summonerName: $("#summonerName").val(),
