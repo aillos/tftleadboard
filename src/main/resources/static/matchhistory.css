@@ -7,6 +7,28 @@
     color: white;
 }
 
+abbr {
+    position: relative;
+    font-size: 16px;
+}
+
+img {
+    background-color: transparent;
+
+}
+
+abbr:hover::after {
+    background: rgba(29, 29, 29, 0.7);
+    border-radius: 4px;
+    bottom: -28px;
+    content: attr(title);
+    display: block;
+    left: -25px;
+    padding: 5px;
+    position: absolute;
+    width: 80px;
+    z-index: 6;
+}
 .matchhistory {
     text-align: center;
     background-color: #1d1d1d;
@@ -29,7 +51,7 @@
     justify-content: center;
     max-width: 900px; /* Set a maximum width for each entry */
     margin-bottom: 20px; /* Adjust the margin as needed */
-    height:100px;
+    height:110px;
 
 }
 
@@ -57,7 +79,9 @@
     margin-right: 10px;
 }
 
-.champion-icons img,
+
+
+.champion-icon img,
 .augment-icons img{
     width: 40px;
     height: 40px;
@@ -71,7 +95,7 @@
 
 }
 
-.champion-icons img:first-child,
+.champion-icon img:first-child,
 .item-icons img:first-child,
 .augment-icons img:first-child,
 .trait-icons img:first-child {
@@ -80,34 +104,62 @@
 
 .trait-icons {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Add flex-wrap property to wrap onto new rows */
     justify-content: center;
     align-items: center;
-    gap: 5px;
     margin-top: 10px;
+    padding: 5px;
+    margin-bottom: 15px;
 }
 
-.trait-icons-row {
+.trait-icon {
+    position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    margin:4px;
+    width: 20px;
+    height: 14px;
+    background-color: #9980fa;
+    margin-top: 8px;
+    z-index: 2;
 }
 
-.trait-icons img {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 1px solid #000000;
+.trait-icon img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    background-color: transparent;
+    z-index: 3;
 }
 
-.trait-icons-row:nth-child(even) img {
-    margin-top: 5px;
+
+.trait-icon:before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 0;
+    heigh:0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 5.5px solid var(--border-bottom-color);
+    z-index: 1;
 }
 
-.trait-icons-row:nth-child(odd) img {
-    margin-bottom: 5px;
+.trait-icon:after{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    heigh:0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 5.5px solid var(--border-top-color);
+    z-index: 1;
 }
+
 
 
 
@@ -122,8 +174,9 @@
 .image-button{
     border-radius: 2px;
     width:105px;
-    margin-right: 52%;
+    margin-right: 68%;
     margin-left: auto;
+    margin-bottom: 10px;
     font-size: 18px;
     display: flex;
     align-items: center;

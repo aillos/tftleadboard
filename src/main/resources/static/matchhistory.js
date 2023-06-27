@@ -106,7 +106,7 @@ function createDivs(puuid) {
 
                     const tactician = JSON.parse(match.tactician); // Parse the tactician object
                     const littleLegend = document.createElement('img');
-                    littleLegend.setAttribute("class", "tactician");
+                    littleLegend.setAttribute("class", "tactician tool");
                     littleLegend.setAttribute("src", `./tftTacticians/${tactician.image}.png`);
                     littleLegend.setAttribute("alt", tactician.name);
                     matchDiv.appendChild(littleLegend);
@@ -114,15 +114,14 @@ function createDivs(puuid) {
                     const augmentIcons = document.createElement('div');
                     augmentIcons.setAttribute("class", "augment-icons");
 
-                    let augmentsString = match.augments.trim(); // Trim the string to remove whitespace
-                    augmentsString = augmentsString.replace(/\\"/g, '"'); // Remove additional backslashes
+                    let augmentsString = match.augments.trim();
+                    augmentsString = augmentsString.replace(/\\"/g, '"');
 
                     try {
                         if (augmentsString.length !== 0) {
                             let augments = JSON.parse(augmentsString);
 
                             if (augments.length === 2) {
-                                // Add an additional entry as the first element
                                 augments.unshift({
                                     id: "missing_legend",
                                     name: "Legend Augment",
@@ -132,10 +131,12 @@ function createDivs(puuid) {
 
                             for (let i = 0; i < augments.length; i++) {
                                 const augment = augments[i];
+                                const abbr = document.createElement("abbr");
+                                abbr.setAttribute("title", augment.name);
                                 const augmentIcon = document.createElement('img');
                                 augmentIcon.setAttribute("src", `./tftAugments/${augment.image}`);
-                                augmentIcon.setAttribute("alt", augment.name);
-                                augmentIcons.appendChild(augmentIcon);
+                                abbr.appendChild(augmentIcon)
+                                augmentIcons.appendChild(abbr);
                             }
                         }
                     } catch (error) {
@@ -153,42 +154,73 @@ function createDivs(puuid) {
                     for (let i=0; i<units.length-1;i++){
                         let unitsJSON = JSON.parse(units[i]);
 
+                        const championIconDiv = document.createElement('div');
+                        championIconDiv.setAttribute("class", "champion-icon");
+                        const abbr = document.createElement("abbr");
+
+                        let name=unitsJSON.name;
+
                         const championIcon = document.createElement('img');
-                        if (unitsJSON.name === "Vel'Koz"){
+
+                        if (name === "Vel'Koz"){
                             championIcon.setAttribute("src", `./championIcons/Velkoz.png`);
-                        } else if (unitsJSON.name === "Kai'Sa"){
+                        } else if (name === "Kai'Sa"){
                             championIcon.setAttribute("src", `./championIcons/Kaisa.png`);
-                        } else if (unitsJSON.name === "Kha'Zix"){
+                        } else if (name === "Kha'Zix"){
                             championIcon.setAttribute("src", `./championIcons/Khazix.png`);
-                        } else if (unitsJSON.name === "Kog'Maw"){
+                        } else if (name === "Kog'Maw"){
                             championIcon.setAttribute("src", `./championIcons/KogMaw.png`);
-                        } else if (unitsJSON.name === "Bel'Veth") {
+                        } else if (name === "Bel'Veth") {
                             championIcon.setAttribute("src", `./championIcons/Belveth.png`);
-                        } else if (unitsJSON.name === "Cho'Gath"){
+                        } else if (name === "Cho'Gath"){
                                 championIcon.setAttribute("src", `./championIcons/Chogath.png`);
-                        } else if (unitsJSON.name === "Rek'Sai"){
+                        } else if (name === "Rek'Sai"){
                             championIcon.setAttribute("src", `./championIcons/RekSai.png`);
-                        } else if (unitsJSON.name === "K'Sante"){
+                        } else if (name === "K'Sante"){
                             championIcon.setAttribute("src", `./championIcons/KSante.png`);
                         }
+
                         championIcon.setAttribute("src", `./championIcons/`+unitsJSON.name+`.png`);
-                        championIcon.setAttribute("alt", unitsJSON.name);
+
                         if (unitsJSON.cost === 4) {
-                            championIcon.style.border = "3px solid #c440da";
+                            championIcon.style.border = "2px solid #c440da";
                         } else if (unitsJSON.cost === 2){
-                            championIcon.style.border = "3px solid #207ac7";
+                            championIcon.style.border = "2px solid #207ac7";
                         } else if (unitsJSON.cost === 1){
-                            championIcon.style.border = "3px solid #11b288";
+                            championIcon.style.border = "2px solid #11b288";
                         } else if (unitsJSON.cost === 6){
-                            championIcon.style.border = "3px solid #ffb93b";
+                            championIcon.style.border = "2px solid #ffb93b";
                         } else if (unitsJSON.cost === 0){
-                            championIcon.style.border = "3px solid #808080";
+                            championIcon.style.border = "2px solid #808080";
                         } else {
-                            championIcon.style.border = "3px solid black";
+                            championIcon.style.border = "2px solid black";
+                        }
+
+                        if (name.toLowerCase() === "kaisa"){
+                            name="Kai'Sa";
+                        } else if (name.toLowerCase() === "reksai"){
+                            name="Rek'Sai";
+                        } else if (name.toLowerCase() === "chogath"){
+                            name="Cho'Gath";
+                        } else if (name.toLowerCase() === "jarvaniv"){
+                            name="Jarvan IV";
+                        } else if (name.toLowerCase() === "belveth"){
+                            name="Bel'Veth";
+                        } else if (name.toLowerCase() === "velkoz"){
+                            name="Vel'Koz";
+                        } else if (name.toLowerCase() === "ksante"){
+                            name="K'Sante";
+                        } else if (name.toLowerCase() === "heimerdingerturret"){
+                            name="Heimerdinger Turret";
+                        } else if (name.toLowerCase() === "thex"){
+                            name="T-Hex";
                         }
 
                         championIcon.style.borderRadius = "10%";
-                        championIcons.appendChild(championIcon);
+                        abbr.setAttribute("title", unitsJSON.name);
+                        abbr.appendChild(championIcon);
+                        championIconDiv.appendChild(abbr)
+                        championIcons.appendChild(championIconDiv);
                     }
 
                     matchDiv.appendChild(championIcons);
@@ -208,9 +240,6 @@ function createDivs(puuid) {
                         const traitsArray = match.traits.split("**");
                         console.log(traitsArray);
 
-                        const maxIconsPerRow = 5; // Maximum number of icons per row
-                        const totalRows = Math.ceil(traitsArray.length / maxIconsPerRow); // Calculate the total number of rows
-
                         const orderedTraits = [];
 
                         for (let j = 0; j < traitsArray.length - 1; j++) {
@@ -225,30 +254,60 @@ function createDivs(puuid) {
 
                         orderedTraits.sort((a, b) => b.style - a.style); // Sort traits by style in descending order
 
-                        for (let i = 0; i < totalRows; i++) {
-                            const traitRow = document.createElement('div');
-                            traitRow.setAttribute('class', 'trait-row');
+                        const colors = {
+                            1: '#e0864f',
+                            2: '#b6d0d2',
+                            3: '#f2d670',
+                            default: '#76d5d3'
+                        };
 
-                            for (let j = i * maxIconsPerRow; j < Math.min((i + 1) * maxIconsPerRow, orderedTraits.length); j++) {
-                                console.log(orderedTraits[j]);
-                                const traitIcon = document.createElement('img');
-                                const name = orderedTraits[j].name;
+                        for (let j = 0; j < orderedTraits.length; j++) {
+                            console.log(orderedTraits[j]);
 
-                                traitIcon.setAttribute('src', `./tftTraits/${name}.png`);
-                                traitIcon.setAttribute('alt', name);
+                            const traitIcon = document.createElement('div');
 
-                                // Apply styles based on the style value
-                                const style = orderedTraits[j].style;
-                                traitIcon.style.backgroundColor = (style === 1) ? '#e0864f' : (style === 2) ? '#b6d0d2' : (style === 3) ? '#f2d670' : '#a9dad9'; // Example colors based on style value
+                            traitIcon.classList.add('trait-icon');
 
-                                traitRow.appendChild(traitIcon);
+                            const traitImage = document.createElement('img');
+
+                            let name = orderedTraits[j].name;
+                            const style = orderedTraits[j].style;
+                            let color = colors[style] || colors.default;
+
+                            traitIcon.style.backgroundColor = color;
+                            traitIcon.style.borderTopColor = color;
+
+
+                            traitIcon.style.setProperty('--border-bottom-color', color); // Set custom CSS property
+                            traitIcon.style.setProperty('--border-top-color', color); // Set custom CSS property
+
+                            traitImage.setAttribute('src', `./tftTraits/${name}.png`);
+                            if(name === "BandleCity"){
+                                name ="Yordles";
+                            } else if (name === "Preserver"){
+                                name = "Invoker";
+                            } else if (name === "Armorclad"){
+                                name = "Juggernaut";
+                            } else if (name === "ShadowIsles"){
+                                name = "Shadow Isles";
                             }
+                            const abbr = document.createElement("abbr");
+                            abbr.setAttribute("title", name);
 
-                            traitIcons.appendChild(traitRow);
+                            traitIcon.appendChild(traitImage);
+                            abbr.appendChild(traitIcon);
+                            traitIcons.appendChild(abbr);
                         }
+
+
+
                     }
 
+
                     matchDiv.appendChild(traitIcons);
+
+
+
                     // Set match details
 
                     document.getElementById('matchhistory').appendChild(matchDiv);
@@ -261,8 +320,6 @@ function createDivs(puuid) {
             });
     }
 }
-
-
 
 
 function getPuuid(summonerName) {
