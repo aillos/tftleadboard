@@ -161,7 +161,7 @@ function createDivs(puuid) {
 
                         const championIcon = document.createElement('img');
 
-                        if (name === "Vel'Koz"){
+                        if (name.toLowerCase() === "Vel'Koz"){
                             championIcon.setAttribute("src", `./championIcons/Velkoz.png`);
                         } else if (name === "Kai'Sa"){
                             championIcon.setAttribute("src", `./championIcons/Kaisa.png`);
@@ -179,7 +179,7 @@ function createDivs(puuid) {
                             championIcon.setAttribute("src", `./championIcons/KSante.png`);
                         }
 
-                        championIcon.setAttribute("src", `./championIcons/`+unitsJSON.name+`.png`);
+
 
                         if (unitsJSON.cost === 4) {
                             championIcon.style.border = "2px solid #c440da";
@@ -197,24 +197,30 @@ function createDivs(puuid) {
 
                         if (name.toLowerCase() === "kaisa"){
                             name="Kai'Sa";
+                            championIcon.setAttribute("src", `./championIcons/Kaisa.png`);
                         } else if (name.toLowerCase() === "reksai"){
                             name="Rek'Sai";
+                            championIcon.setAttribute("src", `./championIcons/RekSai.png`);
                         } else if (name.toLowerCase() === "chogath"){
                             name="Cho'Gath";
+                            championIcon.setAttribute("src", `./championIcons/Chogath.png`);
                         } else if (name.toLowerCase() === "jarvaniv"){
                             name="Jarvan IV";
                         } else if (name.toLowerCase() === "belveth"){
                             name="Bel'Veth";
+                            championIcon.setAttribute("src", `./championIcons/Belveth.png`);
                         } else if (name.toLowerCase() === "velkoz"){
                             name="Vel'Koz";
+                            championIcon.setAttribute("src", `./championIcons/Velkoz.png`);
                         } else if (name.toLowerCase() === "ksante"){
                             name="K'Sante";
+                            championIcon.setAttribute("src", `./championIcons/KSante.png`);
                         } else if (name.toLowerCase() === "heimerdingerturret"){
                             name="Heimerdinger Turret";
                         } else if (name.toLowerCase() === "thex"){
                             name="T-Hex";
                         }
-
+                        championIcon.setAttribute("src", `./championIcons/`+unitsJSON.name+`.png`);
                         championIcon.style.borderRadius = "10%";
                         abbr.setAttribute("title", unitsJSON.name);
                         abbr.appendChild(championIcon);
