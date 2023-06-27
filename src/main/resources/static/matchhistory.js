@@ -223,7 +223,7 @@ function createDivs(puuid) {
                             championIcon.setAttribute("src", `./championIcons/` + unitsJSON.name + `.png`);
                         }
                         championIcon.style.borderRadius = "10%";
-                        abbr.setAttribute("title", unitsJSON.name);
+                        abbr.setAttribute("title", name);
                         abbr.appendChild(championIcon);
                         championIconDiv.appendChild(abbr)
                         championIcons.appendChild(championIconDiv);
