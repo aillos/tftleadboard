@@ -414,21 +414,30 @@ function addMatch(matchId) {
                                     const augments = playerData.augments.map(augmentId => {
                                         const augment = augmentData.data[augmentId];
                                         if (augment && augment.name) {
-                                            return {
-                                                id: augmentId,
-                                                name: augment.name,
-                                                image: augment.image.full
-                                            };
+                                                return {
+                                                    id: augmentId,
+                                                    name: augment.name,
+                                                    image: augment.image.full
+                                                };
                                         } else {
                                             // Handle the case when augment or augment.name is undefined
                                             console.log('Augment not found for ID:', augmentId);
-                                            return {
-                                                id: augmentId,
-                                                name: 'Unknown',
-                                                image: ''
-                                            };
+                                            if (augmentId === "TFT9_Augment_VoidEmblem") {
+                                                return {
+                                                    id: augmentId,
+                                                    name: "Void Crest",
+                                                    image: "Missing-T2.png"
+                                                };
+                                            } else {
+                                                return {
+                                                    id: augmentId,
+                                                    name: 'Unknown',
+                                                    image: "Missing-T2.png"
+                                                };
+                                            }
                                         }
                                     });
+
 
                                     const match = {
                                         matchId: matchId,
