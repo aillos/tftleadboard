@@ -124,7 +124,7 @@
 }
 
 .player-info > h2 {
-    color: #e1d781;
+    color: #efc250;
     background-color: #1d1d1d;
     margin-top: 10px;
     margin-left: 15px;
@@ -142,5 +142,5 @@
 }
 
 .rank{
-    color:#e1d781;
+    color: #efc250;
 }

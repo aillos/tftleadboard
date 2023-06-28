@@ -299,6 +299,8 @@ function createDivs(puuid) {
                                 name = "Juggernaut";
                             } else if (name === "ShadowIsles"){
                                 name = "Shadow Isles";
+                            } else if (name === "Marksman"){
+                                name="Gunner";
                             }
                             const abbr = document.createElement("abbr");
                             abbr.setAttribute("title", name);
