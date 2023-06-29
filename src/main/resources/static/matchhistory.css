@@ -63,12 +63,14 @@ abbr:hover::after {
 
 .placement-icon {
     color: #000;
-    padding: 6px 4px;
+    padding: 4px;
     border-radius: 3px;
     font-size: 20px;
     font-weight: bold;
     margin-left: 0;
-    width:50px;
+    width:43px;
+    z-index: 120;
+    min-width: 43px;
 }
 
 .itemRow {
@@ -104,6 +106,7 @@ abbr:hover::after {
 
 
 .champion-icons {
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -115,6 +118,7 @@ abbr:hover::after {
     display: flex;
     align-items: center;
     margin-right: 10px;
+    margin-left: -5px;
 }
 
 .augment-icons img{
@@ -147,7 +151,7 @@ abbr:hover::after {
     padding-left: 10px;
     padding-right: 10px;
     margin-bottom: 0;
-    margin-left:57px;
+    margin-left:51px;
     margin-right: 10px;
 }
 
