@@ -21,8 +21,8 @@ public class MatchController {
 
 
     @PostMapping("/updateMatch")
-    public void updateMatch(Match Match) {
-        repo.updateMatch(Match);
+    public void updateMatch(Match match) {
+        repo.updateMatch(match);
     }
 
     @GetMapping("/deleteAllMatches")

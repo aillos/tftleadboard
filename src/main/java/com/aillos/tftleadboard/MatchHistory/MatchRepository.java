@@ -18,9 +18,9 @@ public class MatchRepository {
     private Logger logger = LoggerFactory.getLogger(MatchRepository.class);
 
     public boolean saveMatch(Match match) {
-        String sql = "INSERT INTO MatchHistories (matchId, puuid, tactician, units, traits, placement, level, mode, augments) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO MatchHistories (matchId, puuid, tactician, units, traits, placement, level, mode, augments, date) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try {
-            db.update(sql, match.getMatchId(), match.getPuuid(), match.getTactician(), match.getUnits(), match.getTraits(), match.getPlacement(), match.getLevel(), match.getMode(), match.getAugments());
+            db.update(sql, match.getMatchId(), match.getPuuid(), match.getTactician(), match.getUnits(), match.getTraits(), match.getPlacement(), match.getLevel(), match.getMode(), match.getAugments(), match.getDate());
             return true;
         } catch (Exception e) {
             logger.error("Feil i lagre summoner " + e);
@@ -35,10 +35,10 @@ public class MatchRepository {
     }
 
 
-    public boolean updateMatch(Match Match) {
-        String sql = "UPDATE MatchHistories SET matchId=?, mode=?, tactician=?, units=?, traits=?, placement=?, level=? WHERE puuid=?";
+    public boolean updateMatch(Match match) {
+        String sql = "UPDATE MatchHistories SET matchId=?, mode=?, tactician=?, units=?, traits=?, placement=?, level=?, date=? WHERE puuid=?";
         try {
-            db.update(sql,Match.getMatchId(),Match.getPuuid(),Match.getTactician(),Match.getUnits(),Match.getTraits(), Match.getLevel(), Match.getPlacement(), Match.getMode(), Match.getAugments());
+            db.update(sql, match.getMatchId(), match.getPuuid(), match.getTactician(), match.getUnits(), match.getTraits(), match.getPlacement(), match.getLevel(), match.getMode(), match.getAugments(), match.getDate());
             return true;
         } catch (Exception e) {
             logger.error("Feil i lagre summoner " + e);
@@ -47,7 +47,7 @@ public class MatchRepository {
     }
 
     public List<Match> getAllMatches(String puuid){
-        String sql = "SELECT * FROM MatchHistories WHERE puuid=? ORDER BY matchId DESC";
+        String sql = "SELECT * FROM MatchHistories WHERE puuid=? ORDER BY date DESC";
 
         try{
             return db.query(sql,new BeanPropertyRowMapper<>(Match.class), puuid);

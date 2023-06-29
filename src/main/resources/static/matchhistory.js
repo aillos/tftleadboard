@@ -74,6 +74,7 @@ function createDivs(puuid) {
                     const matchDiv = document.createElement('div');
                     matchDiv.setAttribute("class", "match-entry");
 
+
                     const placementIcon = document.createElement('div');
                     placementIcon.setAttribute("class", "placement-icon");
                     const x = match.placement;
@@ -100,7 +101,18 @@ function createDivs(puuid) {
                     }
                     matchDiv.style.borderRadius = "10px";
                     matchDiv.classList.add('match');
+
+                    const date = document.createElement('div');
+                    date.setAttribute("class", "date");
+                    const fullDate = match.date.split(",");
+                    const dayYear = fullDate[0];
+                    const time = fullDate[1];
+                    date.textContent = dayYear;
+                    date.style.color=placementIcon.style.backgroundColor;
+                    matchDiv.appendChild(date);
+
                     matchDiv.appendChild(placementIcon);
+
 
 
                     const tactician = JSON.parse(match.tactician); // Parse the tactician object
@@ -316,7 +328,11 @@ function createDivs(puuid) {
 
 
                     matchDiv.appendChild(traitIcons);
-
+                    const timeDiv = document.createElement('div');
+                    timeDiv.setAttribute("class", "time");
+                    timeDiv.textContent = time;
+                    timeDiv.style.color=placementIcon.style.backgroundColor;
+                    matchDiv.appendChild(timeDiv);
 
 
                     // Set match details
@@ -372,6 +388,19 @@ function addMatch(matchId) {
         const targetPuuid = sessionStorage.getItem('puuid');
         fetchDataFromRiotAPI(endpoint)
             .then(data => {
+                const dateTime = data.info.game_datetime;
+                const seconds = dateTime/1000;
+                const date = new Date(dateTime);
+                const options = {
+                    timeZone: 'Europe/Oslo',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                };
+                const norwegianDateTime = date.toLocaleString('no-NO', options);
                 const playerData = data.info.participants.find(participant => participant.puuid === targetPuuid);
                 const itemID = playerData.companion.item_ID;
 
@@ -379,6 +408,7 @@ function addMatch(matchId) {
                 fetch('https://ddragon.leagueoflegends.com/cdn/13.12.1/data/en_US/tft-tactician.json')
                     .then(response => response.json())
                     .then(jsonData => {
+
                         const tacticianId = findTacticianId(jsonData, itemID);
 
                         if (tacticianId) {
@@ -452,7 +482,8 @@ function addMatch(matchId) {
                                         traits: synergies,
                                         units: champions,
                                         mode: data.info.queue_id,
-                                        augments: JSON.stringify(augments)
+                                        augments: JSON.stringify(augments),
+                                        date: norwegianDateTime
                                     };
 
 
