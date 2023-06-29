@@ -71,19 +71,45 @@ abbr:hover::after {
     width:50px;
 }
 
-.champion-icons{
+.itemRow {
     display: flex;
-    align-items: center;
-
+    justify-content: center;
+    margin-top: 6px;
+    z-index: 50;
+    width:45px;
+    align-self: center;
+    margin-right: 3px;
 }
 
-.item-icons{
+.item-icons {
     display: flex;
     align-items: center;
-    margin-right: 5px;
-    margin-left:-5px;
-
+    align-self: center;
+    margin-right: 15px;
 }
+
+.item-icons img {
+    width: 14px;
+    height: 14px;
+    position:absolute;
+}
+
+.stars{
+    font-size: 12px;
+    width:40px;
+    margin-top:-15px;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+
+.champion-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Add this line */
+}
+
 .trait-icons,
 .augment-icons{
     display: flex;
@@ -91,21 +117,20 @@ abbr:hover::after {
     margin-right: 10px;
 }
 
-
-
-.champion-icon img,
 .augment-icons img{
+    width:45px;
+    heigh:45px;
+    margin-right: 3px;
+}
+
+.champion-icon img{
     width: 40px;
     height: 40px;
     margin-right: 4px;
+    margin-left: 4px;
 }
 
-.item-icons img{
-    width:25px;
-    height:25px;
-    margin:2px;
 
-}
 
 .champion-icon img:first-child,
 .item-icons img:first-child,

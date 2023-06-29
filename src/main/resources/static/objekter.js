@@ -5,10 +5,7 @@ $(function(){
     fetchAPI();
 });
 
-
-
 let riotApiKey = "";
-
 
 function fetchAPI (){
     fetch('/api/riot-key')
@@ -198,7 +195,6 @@ function addExistingSummoners() {
                                     wins: storedWins,
                                     losses: storedLosses,
                                 };
-                                console.log(Summoner);
                                 $.post("/update", Summoner, function () {
                                     getAll();
                                     window.location.href="/";
@@ -234,23 +230,6 @@ function deleteAll() {
 }
 function homepage(){
     window.location.href="/";
-}
-function save() {
-    const Summoner = {
-        summonerName: $("#summonerName").val(),
-        rank: $("#rank").val(),
-        tier: $("#tier").val(),
-        lp: $("#lp").val(),
-        summonerIcon: $("#summonerIcon").val(),
-        summonerId: $("#summonerId").val(),
-        wins: $("#wins").val(),
-        losses: $("#losses").val(),
-
-    };
-    $.post("/save", Summoner, function () {
-        getAll();
-        window.location.href = "/";
-    });
 }
 
 function formaterData(Summoner) {

@@ -75,6 +75,7 @@ function createDivs(puuid) {
                     matchDiv.setAttribute("class", "match-entry");
 
 
+                    //Placement
                     const placementIcon = document.createElement('div');
                     placementIcon.setAttribute("class", "placement-icon");
                     const x = match.placement;
@@ -114,7 +115,7 @@ function createDivs(puuid) {
                     matchDiv.appendChild(placementIcon);
 
 
-
+                    //Tactician / Little Legend
                     const tactician = JSON.parse(match.tactician); // Parse the tactician object
                     const littleLegend = document.createElement('img');
                     littleLegend.setAttribute("class", "tactician tool");
@@ -122,6 +123,7 @@ function createDivs(puuid) {
                     littleLegend.setAttribute("alt", tactician.name);
                     matchDiv.appendChild(littleLegend);
 
+                    //Augments
                     const augmentIcons = document.createElement('div');
                     augmentIcons.setAttribute("class", "augment-icons");
 
@@ -152,119 +154,126 @@ function createDivs(puuid) {
                         }
                     } catch (error) {
                         console.error("Error parsing augments:", error.message);
-                        console.error("Error position:", error.message.slice(error.message.lastIndexOf(' ') + 1));
                     }
 
                     matchDiv.appendChild(augmentIcons);
 
+                    //Units
                     const championIcons = document.createElement('div');
                     championIcons.setAttribute("class", "champion-icons");
 
                     let units = match.units.split("**");
 
-                    for (let i=0; i<units.length-1;i++){
+                    for (let i = 0; i < units.length - 1; i++) {
                         let unitsJSON = JSON.parse(units[i]);
+
+                        const championWrapper = document.createElement('div');
 
                         const championIconDiv = document.createElement('div');
                         championIconDiv.setAttribute("class", "champion-icon");
                         const abbr = document.createElement("abbr");
-
-                        let name=unitsJSON.name;
-
+                        let name = unitsJSON.name;
                         const championIcon = document.createElement('img');
 
-                        if (name.toLowerCase() === "Vel'Koz"){
-                            championIcon.setAttribute("src", `./championIcons/Velkoz.png`);
-                        } else if (name === "Kai'Sa"){
-                            championIcon.setAttribute("src", `./championIcons/Kaisa.png`);
-                        } else if (name === "Kha'Zix"){
-                            championIcon.setAttribute("src", `./championIcons/Khazix.png`);
-                        } else if (name === "Kog'Maw"){
-                            championIcon.setAttribute("src", `./championIcons/KogMaw.png`);
-                        } else if (name === "Bel'Veth") {
-                            championIcon.setAttribute("src", `./championIcons/Belveth.png`);
-                        } else if (name === "Cho'Gath"){
-                                championIcon.setAttribute("src", `./championIcons/Chogath.png`);
-                        } else if (name === "Rek'Sai"){
-                            championIcon.setAttribute("src", `./championIcons/RekSai.png`);
-                        } else if (name === "K'Sante"){
-                            championIcon.setAttribute("src", `./championIcons/KSante.png`);
-                        }
+                        // Units cost
+                        const unitColor = {
+                            4: '#c440da',
+                            2: '#207ac7',
+                            1: '#11b288',
+                            6: '#ffb93b',
+                            0: '#808080',
+                            default: '#000000'
+                        };
 
+                        const cost = unitsJSON.cost;
+                        const borderColor = unitColor[cost] || unitColor.default;
+                        championIcon.style.border = `2px solid ${borderColor}`;
 
+                        // Units name and icon
+                        const nameMappings = {
+                            "velkoz": "Vel'Koz",
+                            "kaisa": "Kai'Sa",
+                            "khazix": "Kha'Zix",
+                            "kogmaw": "Kog'Maw",
+                            "belveth": "Bel'Veth",
+                            "chogath": "Cho'Gath",
+                            "reksai": "Rek'Sai",
+                            "ksante": "K'Sante",
+                            "jarvaniv": "Jarvan IV",
+                            "heimerdingerturret": "Heimerdinger Turret",
+                            "thex": "T-Hex"
+                        };
 
-                        if (unitsJSON.cost === 4) {
-                            championIcon.style.border = "2px solid #c440da";
-                        } else if (unitsJSON.cost === 2){
-                            championIcon.style.border = "2px solid #207ac7";
-                        } else if (unitsJSON.cost === 1){
-                            championIcon.style.border = "2px solid #11b288";
-                        } else if (unitsJSON.cost === 6){
-                            championIcon.style.border = "2px solid #ffb93b";
-                        } else if (unitsJSON.cost === 0){
-                            championIcon.style.border = "2px solid #808080";
-                        } else {
-                            championIcon.style.border = "2px solid black";
-                        }
+                        const lowercaseName = name.toLowerCase();
+                        const mappedName = nameMappings[lowercaseName] || name;
+                        const fileName = `./championIcons/${name}.png`;
 
-                        if (name.toLowerCase() === "kaisa"){
-                            name="Kai'Sa";
-                            championIcon.setAttribute("src", `./championIcons/Kaisa.png`);
-                        } else if (name.toLowerCase() === "reksai"){
-                            name="Rek'Sai";
-                            championIcon.setAttribute("src", `./championIcons/RekSai.png`);
-                        } else if (name.toLowerCase() === "chogath"){
-                            name="Cho'Gath";
-                            championIcon.setAttribute("src", `./championIcons/Chogath.png`);
-                        } else if (name.toLowerCase() === "jarvaniv"){
-                            championIcon.setAttribute("src", `./championIcons/` + unitsJSON.name + `.png`);
-                            name="Jarvan IV";
-                        } else if (name.toLowerCase() === "belveth"){
-                            name="Bel'Veth";
-                            championIcon.setAttribute("src", `./championIcons/Belveth.png`);
-                        } else if (name.toLowerCase() === "velkoz"){
-                            name="Vel'Koz";
-                            championIcon.setAttribute("src", `./championIcons/Velkoz.png`);
-                        } else if (name.toLowerCase() === "ksante"){
-                            name="K'Sante";
-                            championIcon.setAttribute("src", `./championIcons/KSante.png`);
-                        } else if (name.toLowerCase() === "heimerdingerturret"){
-                            championIcon.setAttribute("src", `./championIcons/` + unitsJSON.name + `.png`);
-                            name="Heimerdinger Turret";
-                        } else if (name.toLowerCase() === "thex"){
-                            championIcon.setAttribute("src", `./championIcons/` + unitsJSON.name + `.png`);
-                            name="T-Hex";
-                        } else {
-                            championIcon.setAttribute("src", `./championIcons/` + unitsJSON.name + `.png`);
-                        }
+                        championIcon.setAttribute("src", fileName);
+
                         championIcon.style.borderRadius = "10%";
-                        abbr.setAttribute("title", name);
+                        abbr.setAttribute("title", mappedName);
+
+                        // Items
+                        const itemRow = document.createElement("div");
+                        itemRow.setAttribute("class", "itemRow");
+
+                        const items = unitsJSON.items;
+                        for (let j = 0; j < items.length; j++) {
+                            let item = items[j];
+                            const itemDiv = document.createElement('div');
+                            itemDiv.setAttribute("class", "item-icons");
+                            const itemImg = document.createElement('img');
+                            itemImg.setAttribute("src", `./tftItems/${item}.png`);
+                            itemImg.setAttribute("class", "items");
+                            itemDiv.appendChild(itemImg);
+                            itemRow.appendChild(itemDiv);
+                        }
+
                         abbr.appendChild(championIcon);
-                        championIconDiv.appendChild(abbr)
-                        championIcons.appendChild(championIconDiv);
+                        championIconDiv.appendChild(abbr);
+
+                        const starDiv = document.createElement("div");
+                        starDiv.setAttribute("class", "stars");
+                        const stars = {
+                            3: '★★★',
+                            2: '★★',
+                            1: '★',
+                            default: ''
+                        }
+                        const starColor = {
+                            3: '#f3ce56',
+                            2: '#b6d0d2',
+                            1: '#e0864f',
+                            default: ''
+                        }
+                        const finalStarColor = starColor[unitsJSON.stars] || starColor.default;
+                        const finalStars = stars[unitsJSON.stars] || stars.default;
+                        starDiv.textContent=finalStars;
+                        starDiv.style.color=finalStarColor;
+
+                        championWrapper.appendChild(starDiv);
+                        championWrapper.appendChild(championIconDiv);
+                        championWrapper.appendChild(itemRow);
+
+                        championIcons.appendChild(championWrapper);
                     }
 
                     matchDiv.appendChild(championIcons);
 
-                    // Set item icons
-                    const itemIcons = document.createElement('div');
-                    itemIcons.setAttribute("class", "item-icons");
 
-                    matchDiv.appendChild(itemIcons);
 
-                    // Set trait icons
+
+
+                    // Trait icons
                     const traitIcons = document.createElement('div');
                     traitIcons.setAttribute('class', 'trait-icons');
 
                     if (match.traits && typeof match.traits === 'string') {
-                        console.log(match.traits);
                         const traitsArray = match.traits.split("**");
-                        console.log(traitsArray);
 
                         const orderedTraits = [];
 
                         for (let j = 0; j < traitsArray.length - 1; j++) {
-                            console.log(traitsArray[j]);
                             let traitJSON = JSON.parse(traitsArray[j]);
 
                             const style = traitJSON.style;
@@ -279,11 +288,10 @@ function createDivs(puuid) {
                             1: '#e0864f',
                             2: '#b6d0d2',
                             3: '#f2d670',
-                            default: '#76d5d3'
+                            default: '#92f4ff'
                         };
 
                         for (let j = 0; j < orderedTraits.length; j++) {
-                            console.log(orderedTraits[j]);
 
                             const traitIcon = document.createElement('div');
 
@@ -303,17 +311,19 @@ function createDivs(puuid) {
                             traitIcon.style.setProperty('--border-top-color', color); // Set custom CSS property
 
                             traitImage.setAttribute('src', `./tftTraits/${name}.png`);
-                            if(name === "BandleCity"){
-                                name ="Yordles";
-                            } else if (name === "Preserver"){
-                                name = "Invoker";
-                            } else if (name === "Armorclad"){
-                                name = "Juggernaut";
-                            } else if (name === "ShadowIsles"){
-                                name = "Shadow Isles";
-                            } else if (name === "Marksman"){
-                                name="Gunner";
+
+                            const nameMappings = {
+                                "BandleCity": "Yordles",
+                                "Preserver": "Invoker",
+                                "Armorclad": "Juggernaut",
+                                "ShadowIsles": "Shadow Isles",
+                                "Marksman": "Gunner"
+                            };
+
+                            if (nameMappings.hasOwnProperty(name)) {
+                                name = nameMappings[name];
                             }
+
                             const abbr = document.createElement("abbr");
                             abbr.setAttribute("title", name);
 
@@ -328,6 +338,8 @@ function createDivs(puuid) {
 
 
                     matchDiv.appendChild(traitIcons);
+
+                    //Date and Time
                     const timeDiv = document.createElement('div');
                     timeDiv.setAttribute("class", "time");
                     timeDiv.textContent = time;
@@ -335,7 +347,7 @@ function createDivs(puuid) {
                     matchDiv.appendChild(timeDiv);
 
 
-                    // Set match details
+                    //Finish the match
 
                     document.getElementById('matchhistory').appendChild(matchDiv);
                 } else {
@@ -354,11 +366,10 @@ function getPuuid(summonerName) {
         puuid = data;
     })
 }
+
 function loadMatches() {
-    // Call getMatchIds to retrieve match IDs
     getMatchIds(data)
         .then(matchIds => {
-            console.log(matchIds);
 
             $.get("/deleteAllMatches", { puuid: puuid }, function() {
                 console.log("Successfully deleted matches");
@@ -369,9 +380,8 @@ function loadMatches() {
                 addMatch(matchId);
             });
 
-            // Wait for 3 seconds (adjust the delay as needed)
             setTimeout(function() {
-                // Refresh the page
+                // Very necessary timeout!!
                 location.reload();
             }, 2000);
         })
@@ -515,8 +525,6 @@ function addMatch(matchId) {
                 console.log('Error:', error);
             });
 }
-
-
 
 
 function findTacticianId(jsonData, itemID) {
