@@ -138,11 +138,13 @@ abbr:hover::after {
 
 .champion-icon img:first-child,
 .item-icons img:first-child,
-.augment-icons img:first-child,
 .trait-icons img:first-child {
     margin-left: 0;
 }
+.augment-icons img:first-child{
+    margin-left: 2px;
 
+}
 .date{
     position:absolute;
     font-weight: bold;
