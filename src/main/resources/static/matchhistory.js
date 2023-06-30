@@ -74,33 +74,28 @@ function createDivs(puuid) {
                     const matchDiv = document.createElement('div');
                     matchDiv.setAttribute("class", "match-entry");
 
-
                     //Placement
                     const placementIcon = document.createElement('div');
                     placementIcon.setAttribute("class", "placement-icon");
                     const x = match.placement;
-                    if (x===1){
-                        placementIcon.textContent = x + "st";
-                        matchDiv.style.border = "2px solid #ffb93b";
-                        placementIcon.style.backgroundColor="#ffb93b";
-                    } else if (x===2){
-                        placementIcon.textContent = x + "nd";
-                        matchDiv.style.border = "2px solid #c440da";
-                        placementIcon.style.backgroundColor="#c440da";
-                    } else if (x===3){
-                        placementIcon.textContent = x + "rd";
-                        matchDiv.style.border = "2px solid #207ac7";
-                        placementIcon.style.backgroundColor="#207ac7";
-                    } else if (x===4){
-                        placementIcon.textContent = x + "th";
-                        matchDiv.style.border = "2px solid #11b288";
-                        placementIcon.style.backgroundColor="#11b288";
-                    } else {
-                        placementIcon.textContent = x + "th";
-                        matchDiv.style.border = "2px solid #808080";
-                        placementIcon.style.backgroundColor="#808080";
+                    const placementColor = {
+                        1: '#ffb93b',
+                        2: '#c440da',
+                        3: '#207ac7',
+                        4: '#11b288',
+                        default: '#808080'
                     }
-                    matchDiv.style.borderRadius = "10px";
+                    const placementEnding = {
+                        1: 'st',
+                        2: 'nd',
+                        3: 'rd',
+                        default: 'th'
+                    }
+                    const placeColor = placementColor[x] || placementColor.default;
+                    const placeEnd = placementEnding[x] || placementEnding.default;
+                    placementIcon.textContent = x + placeEnd;
+                    matchDiv.style.cssText = `border: 2px solid ${placeColor}; border-radius: 10px;`;
+                    placementIcon.style.backgroundColor=`${placeColor}`;
                     matchDiv.classList.add('match');
 
                     const date = document.createElement('div');
@@ -110,8 +105,8 @@ function createDivs(puuid) {
                     const time = fullDate[1];
                     date.textContent = dayYear;
                     date.style.color=placementIcon.style.backgroundColor;
-                    matchDiv.appendChild(date);
 
+                    matchDiv.appendChild(date);
                     matchDiv.appendChild(placementIcon);
 
 
@@ -121,6 +116,8 @@ function createDivs(puuid) {
                     littleLegend.setAttribute("class", "tactician tool");
                     littleLegend.setAttribute("src", `./tftTacticians/${tactician.image}.png`);
                     littleLegend.setAttribute("alt", tactician.name);
+
+
                     matchDiv.appendChild(littleLegend);
 
                     //Augments
@@ -168,7 +165,6 @@ function createDivs(puuid) {
                         let unitsJSON = JSON.parse(units[i]);
 
                         const championWrapper = document.createElement('div');
-
                         const championIconDiv = document.createElement('div');
                         championIconDiv.setAttribute("class", "champion-icon");
                         const abbr = document.createElement("abbr");

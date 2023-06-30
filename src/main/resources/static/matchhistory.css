@@ -49,8 +49,8 @@ abbr:hover::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 900px; /* Set a maximum width for each entry */
-    margin-bottom: 25px; /* Adjust the margin as needed */
+    max-width: 900px;
+    margin-bottom: 25px;
     height:110px;
 
 }
@@ -110,7 +110,7 @@ abbr:hover::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative; /* Add this line */
+    position: relative;
 }
 
 .trait-icons,
@@ -239,9 +239,10 @@ abbr:hover::after {
 }
 
 .image-button{
+    align-self: center;
     border-radius: 2px;
     width:105px;
-    margin-right: 68%;
+    margin-right: 0px;
     margin-left: auto;
     margin-bottom: 30px;
     font-size: 18px;
@@ -249,13 +250,20 @@ abbr:hover::after {
     align-items: center;
     justify-content: center;
     vertical-align: middle;
-    outline: none;
-    border: 0; /
+    border: 0;
     cursor: pointer;
     border: 2px solid #1d1d1d;
     border-radius: 10px;
+    text-align: center;
+    position: relative;
 }
-
+.refresh{
+    width:100%;
+    align-content: center;
+    display: grid;
+    align-self: center;
+    justify-content: center;
+}
 .image-button > p {
     margin-left: 5px;
     display: inline-block;
