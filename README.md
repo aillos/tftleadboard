@@ -2,16 +2,16 @@
 
 This repository is for the web application or website; TFT Leaderboard.
 The website is for me and my friends to track our Teamfight Tactics progress and compare our rank to eachother.
-The data is being fetched from the Riot Games API and stored in an SQL Database using Azure. I am using Azure Web App Hostig and Github Pages to run and deploy my application.
+The data is being fetched from the Riot Games API and stored in an SQL Database using Azure. I am using Azure Web App Hosting and Github Pages to run and deploy my application.
 
-##Languages:
+## Languages:
 - [Java](https://www.java.com/en/)
 - [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - With use of [Maven](https://maven.apache.org/)
 
-##Built with:
+## Built with:
 - [Spring Boot](https://spring.io/)
 - [Azure SQL Database](https://azure.microsoft.com/en-us/products/azure-sql/)
 - [Azure Web Hosting](https://azure.microsoft.com/en-us/products/app-service/web/)
