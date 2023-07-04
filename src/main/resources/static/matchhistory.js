@@ -219,8 +219,15 @@ function createDivs(puuid) {
 
                         const lowercaseName = name.toLowerCase();
                         const mappedName = nameMappings[lowercaseName] || name;
-                        const fileName = `./championIcons/${name}.png`;
-                        unitArray.push(name);
+                        const nameMappings2 = {
+                            "Kaisa":"KaiSa",
+                            "Velkoz": "VelKoz",
+                            "Reksai": "RekSai",
+                            "Chogath": "ChoGath"
+                        };
+                        const forImage = nameMappings2[name] || name;
+                        const fileName = `./championIcons/${forImage}.png`;
+                        unitArray.push(forImage);
 
                         championIcon.setAttribute("src", fileName);
 
