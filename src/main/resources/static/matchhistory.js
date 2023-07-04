@@ -60,7 +60,12 @@ function test() {
     document.getElementById("test").textContent = data;
 }
 function createDivs(puuid) {
-
+    let placementArray = [];
+    let tacticianArray = [];
+    let unitArray = [];
+    let itemArray = [];
+    let augmentArray = [];
+    let traitArray = [];
     for (let i = 0; i < 10; i++) {
 
         // Retrieve the match details from the database
@@ -77,7 +82,7 @@ function createDivs(puuid) {
                     //Placement
                     const placementIcon = document.createElement('div');
                     placementIcon.setAttribute("class", "placement-icon");
-                    const x = match.placement;
+                    const placement = match.placement;
                     const placementColor = {
                         1: '#ffb93b',
                         2: '#c440da',
@@ -91,9 +96,10 @@ function createDivs(puuid) {
                         3: 'rd',
                         default: 'th'
                     }
-                    const placeColor = placementColor[x] || placementColor.default;
-                    const placeEnd = placementEnding[x] || placementEnding.default;
-                    placementIcon.textContent = x + placeEnd;
+                    placementArray.push(placement);
+                    const placeColor = placementColor[placement] || placementColor.default;
+                    const placeEnd = placementEnding[placement] || placementEnding.default;
+                    placementIcon.textContent = placement + placeEnd;
                     matchDiv.style.cssText = `border: 2px solid ${placeColor}; border-radius: 10px;`;
                     placementIcon.style.backgroundColor=`${placeColor}`;
                     matchDiv.classList.add('match');
@@ -119,6 +125,7 @@ function createDivs(puuid) {
 
 
                     matchDiv.appendChild(littleLegend);
+                    tacticianArray.push(tactician.name);
 
                     //Augments
                     const augmentIcons = document.createElement('div');
@@ -147,6 +154,7 @@ function createDivs(puuid) {
                                 augmentIcon.setAttribute("src", `./tftAugments/${augment.image}`);
                                 abbr.appendChild(augmentIcon)
                                 augmentIcons.appendChild(abbr);
+                                augmentArray.push(augment.name);
                             }
                         }
                     } catch (error) {
@@ -203,6 +211,7 @@ function createDivs(puuid) {
                         const lowercaseName = name.toLowerCase();
                         const mappedName = nameMappings[lowercaseName] || name;
                         const fileName = `./championIcons/${name}.png`;
+                        unitArray.push(name);
 
                         championIcon.setAttribute("src", fileName);
 
@@ -223,6 +232,7 @@ function createDivs(puuid) {
                             itemImg.setAttribute("class", "items");
                             itemDiv.appendChild(itemImg);
                             itemRow.appendChild(itemDiv);
+                            itemArray.push(item);
                         }
 
                         abbr.appendChild(championIcon);
@@ -320,12 +330,14 @@ function createDivs(puuid) {
                                 name = nameMappings[name];
                             }
 
+
                             const abbr = document.createElement("abbr");
                             abbr.setAttribute("title", name);
 
                             traitIcon.appendChild(traitImage);
                             abbr.appendChild(traitIcon);
                             traitIcons.appendChild(abbr);
+                            traitArray.push(name);
                         }
 
 
@@ -344,7 +356,14 @@ function createDivs(puuid) {
 
 
                     //Finish the match
-
+                    if (i === 9){
+                        logMostOccurringValue(unitArray);
+                        logMostOccurringValue(itemArray);
+                        logMostOccurringValue(augmentArray);
+                        logMostOccurringValue(tacticianArray);
+                        logMostOccurringValue(traitArray);
+                        console.log(placementArray);
+                    }
                     document.getElementById('matchhistory').appendChild(matchDiv);
                 } else {
                     console.error('No match found for the specified puuid');
@@ -353,6 +372,32 @@ function createDivs(puuid) {
             .catch(error => {
                 console.error('Error retrieving match details:', error);
             });
+
+    }
+
+
+}
+function countOccurrences(array) {
+    let countObject = array.reduce(function(count, currentValue) {
+        return (
+            count[currentValue]
+                ? ++count[currentValue]
+                : (count[currentValue] = 1),
+                count
+        );
+    }, {});
+
+    return countObject;
+}
+function logMostOccurringValue(array) {
+    const countedValue = countOccurrences(array);
+    const sortedCountedValue = Object.entries(countedValue).sort((a, b) => b[1] - a[1]);
+
+    if (sortedCountedValue.length > 0) {
+        const mostOccurringValue = sortedCountedValue[0][0];
+        console.log("Most occurring value:", mostOccurringValue);
+    } else {
+        console.log("No values in the array.");
     }
 }
 

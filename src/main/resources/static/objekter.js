@@ -1,8 +1,11 @@
 
 $(function(){
+    resetCache();
     getAllSummonerIds();
+
     getAll();
     fetchAPI();
+    console.log(summonerIds);
 });
 
 let riotApiKey = "";
@@ -16,6 +19,11 @@ function fetchAPI (){
         .catch(error => {
             console.error('Error retrieving Riot API key:', error);
         });
+}
+function resetCache() {
+    localStorage.removeItem('summonerIds');
+    summonerIds = null;
+    isSummonerIdsLoaded = false;
 }
 
 let summonerIds = null;
@@ -197,7 +205,7 @@ function addExistingSummoners() {
                                 };
                                 $.post("/update", Summoner, function () {
                                     getAll();
-                                    window.location.href="/";
+                                   // window.location.href="/";
                                 });
                             } else {
                             }
