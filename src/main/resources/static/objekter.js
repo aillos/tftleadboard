@@ -1,25 +1,26 @@
 
 $(function(){
-    resetCache();
+    //resetCache();
     getAllSummonerIds();
-
+    setTimeout(enableButton, 2000);
     getAll();
-    fetchAPI();
-    console.log(summonerIds);
 });
+let riotApiKey;
+fetch('/api/riot-api-key')
+    .then(response => response.json())  // Parse the response as JSON
+    .then(data => {
+        const apiKey = data.RIOT_API_KEY;  // Extract the API key from the response object
+        riotApiKey = apiKey;
+    })
+    .catch(error => {
+        // Handle any errors that occur during the request
+        console.error('Error retrieving Riot API key:', error);
+    });
 
-let riotApiKey = "";
-
-function fetchAPI (){
-    fetch('/api/riot-key')
-        .then(response => response.text())
-        .then(apiKey => {
-            riotApiKey = apiKey;
-        })
-        .catch(error => {
-            console.error('Error retrieving Riot API key:', error);
-        });
+function enableButton(){
+    document.getElementById("btn").disabled = false;
 }
+
 function resetCache() {
     localStorage.removeItem('summonerIds');
     summonerIds = null;
@@ -205,22 +206,24 @@ function addExistingSummoners() {
                                 };
                                 $.post("/update", Summoner, function () {
                                     getAll();
-                                   // window.location.href="/";
+                                    window.location.href="/";
+                                    setTimeout(enableButton, 60000);
                                 });
                             } else {
                             }
                         })
                         .catch(error => {
-                            console.error('Error:', error);
+                            console.error('Error:', );
                         });
                 } else {
 
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Error:', );
             });
     });
+
 }
 
 
@@ -244,7 +247,7 @@ function formaterData(Summoner) {
     for (const [index, sum] of Summoner.entries()) {
 
         document.getElementById("summoner"+(index+1)).textContent=(index+1)+". "+sum.summonerName;
-        document.getElementById("summonerIcon"+(index+1)).src=`http://ddragon.leagueoflegends.com/cdn/13.12.1/img/profileicon/`+sum.summonerIcon+`.png`;
+        document.getElementById("summonerIcon"+(index+1)).src=`http://ddragon.leagueoflegends.com/cdn/13.13.1/img/profileicon/`+sum.summonerIcon+`.png`;
         document.getElementById("games"+(index+1)).textContent="Games played: " + (sum.wins+sum.losses);
         document.getElementById("wins"+(index+1)).textContent="Top 4: " + sum.wins;
         document.getElementById("losses"+(index+1)).textContent="Bot 4: " + sum.losses;

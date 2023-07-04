@@ -1,11 +1,15 @@
-
+console.error = function() {};
+console.warn = function() {};
+window.addEventListener('error', function(event) {
+    event.preventDefault();
+}, true);
 
 
 $(function() {
-    fetchAPI();
     getMatchIds(data);
     getPuuid(data);
     createDivs(sessionStorage.getItem('puuid'));
+    document.getElementById("iconText").textContent=data;
 });
 
 const queryParams = new URLSearchParams(window.location.search);
@@ -13,7 +17,7 @@ const data = queryParams.get('data');
 let matchIds = null;
 let isMatchIdsLoaded = false;
 let puuid;
-let riotApiKey = "";
+
 
 
 function fetchDataFromRiotAPI(endpoint) {
@@ -31,16 +35,18 @@ function fetchDataFromRiotAPI(endpoint) {
         });
 }
 
-function fetchAPI (){
-    fetch('/api/riot-key')
-        .then(response => response.text())
-        .then(apiKey => {
-            riotApiKey = apiKey;
-        })
-        .catch(error => {
-            console.error('Error retrieving Riot API key:', error);
-        });
-}
+let riotApiKey;
+fetch('/api/riot-api-key')
+    .then(response => response.json())  // Parse the response as JSON
+    .then(data => {
+        const apiKey = data.RIOT_API_KEY;  // Extract the API key from the response object
+        riotApiKey = apiKey;
+    })
+    .catch(error => {
+        // Handle any errors that occur during the request
+        console.error('Error retrieving Riot API key:', error);
+    });
+
 
 async function getMatchIds(summonerName) {
     try {
@@ -97,11 +103,14 @@ function createDivs(puuid) {
                         default: 'th'
                     }
                     placementArray.push(placement);
+
                     const placeColor = placementColor[placement] || placementColor.default;
                     const placeEnd = placementEnding[placement] || placementEnding.default;
                     placementIcon.textContent = placement + placeEnd;
                     matchDiv.style.cssText = `border: 2px solid ${placeColor}; border-radius: 10px;`;
                     placementIcon.style.backgroundColor=`${placeColor}`;
+                    document.getElementById("placement"+(i+1)).textContent=placement;
+                    document.getElementById("placement"+(i+1)).style.backgroundColor=`${placeColor}`;
                     matchDiv.classList.add('match');
 
                     const date = document.createElement('div');
@@ -125,7 +134,7 @@ function createDivs(puuid) {
 
 
                     matchDiv.appendChild(littleLegend);
-                    tacticianArray.push(tactician.name);
+                    tacticianArray.push(tactician.image);
 
                     //Augments
                     const augmentIcons = document.createElement('div');
@@ -154,7 +163,7 @@ function createDivs(puuid) {
                                 augmentIcon.setAttribute("src", `./tftAugments/${augment.image}`);
                                 abbr.appendChild(augmentIcon)
                                 augmentIcons.appendChild(abbr);
-                                augmentArray.push(augment.name);
+                                augmentArray.push(augment.image);
                             }
                         }
                     } catch (error) {
@@ -357,11 +366,16 @@ function createDivs(puuid) {
 
                     //Finish the match
                     if (i === 9){
-                        logMostOccurringValue(unitArray);
-                        logMostOccurringValue(itemArray);
-                        logMostOccurringValue(augmentArray);
-                        logMostOccurringValue(tacticianArray);
-                        logMostOccurringValue(traitArray);
+                        const icon = logMostOccurringValue(tacticianArray);
+                        document.getElementById("icon").src=`./tftTacticians/`+icon+`.png`;
+                        const unit = logMostOccurringValue(unitArray);
+                        document.getElementById("unit").src=`./championIcons/`+unit+`.png`;
+                        const item = logMostOccurringValue(itemArray);
+                        document.getElementById("item").src=`./tftItems/`+item+`.png`;
+                        const augment = logMostOccurringValue(augmentArray);
+                        document.getElementById("augment").src=`./tftAugments/`+augment;
+                        const trait = logMostOccurringValue(traitArray);
+                        document.getElementById("trait").src=`./tftTraits/`+trait+`_White.png`;
                         console.log(placementArray);
                     }
                     document.getElementById('matchhistory').appendChild(matchDiv);
@@ -396,9 +410,11 @@ function logMostOccurringValue(array) {
     if (sortedCountedValue.length > 0) {
         const mostOccurringValue = sortedCountedValue[0][0];
         console.log("Most occurring value:", mostOccurringValue);
+        return mostOccurringValue;
     } else {
         console.log("No values in the array.");
     }
+
 }
 
 
