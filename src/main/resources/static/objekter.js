@@ -247,11 +247,11 @@ function formaterData(Summoner) {
     for (const [index, sum] of Summoner.entries()) {
 
         document.getElementById("summoner"+(index+1)).textContent=(index+1)+". "+sum.summonerName;
-        document.getElementById("summonerIcon"+(index+1)).src=`http://ddragon.leagueoflegends.com/cdn/13.13.1/img/profileicon/`+sum.summonerIcon+`.png`;
+        document.getElementById("summonerIcon"+(index+1)).src=`https://ddragon.leagueoflegends.com/cdn/13.13.1/img/profileicon/`+sum.summonerIcon+`.png`;
         document.getElementById("games"+(index+1)).textContent="Games played: " + (sum.wins+sum.losses);
-        document.getElementById("wins"+(index+1)).textContent="Top 4: " + sum.wins;
-        document.getElementById("losses"+(index+1)).textContent="Bot 4: " + sum.losses;
-        document.getElementById("wr"+(index+1)).textContent="Wr: " + Math.trunc(sum.wins/(sum.losses+sum.wins)*100) + "%";
+        document.getElementById("wins"+(index+1)).textContent="Wins: " + sum.wins;
+        document.getElementById("losses"+(index+1)).textContent="Losses: " + sum.losses;
+        document.getElementById("wr"+(index+1)).textContent="Ratio: " + Math.trunc(sum.wins/(sum.losses+sum.wins)*100) + "%";
         document.getElementById("rank"+(index+1)).textContent=sum.tier + " " + sum.rank+" "+sum.lp+ " LP";
 
     }

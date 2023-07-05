@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./matchhistory.js" data-base-url="./"></script>
 
-    <link rel="stylesheet" href="topsection.css">
+    <link rel="stylesheet" href="topsection2.css">
     <link rel="stylesheet" href="matchhistory.css">
     <link rel = "icon" href =
             "icons/tft.png"
@@ -15,17 +15,23 @@
 </head>
 <body>
 <div class="header">
-    <div class="headLogo" onclick="homepage()">
-        <img src="https://i.imgur.com/E45FEl4.png" alt="Teamfight Tactics Leaderboard">
+    <div class="headLogo">
+        <img src="./icons/logoHomemade.png" alt="Teamfight Tactics Leaderboard">
     </div>
 </div>
 </div>
 <div class="refresh">
-    <button class="image-button" onclick=loadMatches()>
-        <img src="icons/refresh.png" alt="Refresh" style="display: inline-block">
-        <p style="display: inline-block">Refresh</p>
+    <button class="image-button2" id="btn2" onclick=homepage()>
+        <img src="./icons/back.png" alt="Back" style="display: inline-block">
+        <p style="display: inline-block">Back</p>
     </button>
 
+    <button class="image-button" onclick=loadMatches()>
+        <img src="./icons/refresh.png" alt="Refresh" style="display: inline-block">
+        <p style="display: inline-block">Refresh</p>
+    </button>
+</div>
+<div class="refresh2">
 <div class="playerCard">
     <div class="playerIcon" id="iconPlayer">
         <img id="icon" src="">

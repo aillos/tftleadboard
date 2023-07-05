@@ -333,7 +333,7 @@ function createDivs(puuid) {
                             traitIcon.style.setProperty('--border-top-color', color); // Set custom CSS property
 
                             traitImage.setAttribute('src', `./tftTraits/${name}.png`);
-
+                            traitArray.push(name);
                             const nameMappings = {
                                 "BandleCity": "Yordles",
                                 "Preserver": "Invoker",
@@ -353,7 +353,7 @@ function createDivs(puuid) {
                             traitIcon.appendChild(traitImage);
                             abbr.appendChild(traitIcon);
                             traitIcons.appendChild(abbr);
-                            traitArray.push(name);
+
                         }
 
 

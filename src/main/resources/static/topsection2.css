@@ -13,14 +13,14 @@
     align-content: center;
     width: 100%;
     background-color: #1d1d1d;
-    margin-bottom:-45px;
+    margin-bottom:-35px;
 }
 .headLogo {
     display: flex; /* Add display flex */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     background-color: #1d1d1d;
-    height: 350px;
+    height: 275px;
 }
 
 .headLogo > img {
