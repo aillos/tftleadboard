@@ -1,19 +1,20 @@
 
 $(function(){
-    //resetCache();
+    // resetCache();
     getAllSummonerIds();
     setTimeout(enableButton, 2000);
     getAll();
 });
+
 let riotApiKey;
+
 fetch('/api/riot-api-key')
-    .then(response => response.json())  // Parse the response as JSON
+    .then(response => response.json())
     .then(data => {
-        const apiKey = data.RIOT_API_KEY;  // Extract the API key from the response object
+        const apiKey = data.RIOT_API_KEY;
         riotApiKey = apiKey;
     })
     .catch(error => {
-        // Handle any errors that occur during the request
         console.error('Error retrieving Riot API key:', error);
     });
 
@@ -40,8 +41,6 @@ function getAllSummonerIds() {
     if (cachedSummonerIds) {
         summonerIds = JSON.parse(cachedSummonerIds);
         isSummonerIdsLoaded = true;
-        createDivs(summonerIds);
-        return;
     }
 
     $.get("/getAllSummonerIds", function(data) {
@@ -49,9 +48,12 @@ function getAllSummonerIds() {
         isSummonerIdsLoaded = true;
         localStorage.setItem('summonerIds', JSON.stringify(summonerIds));
         createDivs(summonerIds);
+    }).fail(function() {
+        summonerIds = [];
+        isSummonerIdsLoaded = true;
+        createDivs(summonerIds);
     });
 }
-
 
 function createDivs(summonerIds) {
     summonerIds.forEach((summonerId, index) => {
@@ -206,7 +208,7 @@ function addExistingSummoners() {
                                 };
                                 $.post("/update", Summoner, function () {
                                     getAll();
-                                    window.location.href="/";
+                                    setTimeout(window.location.href="/", 500);
                                     setTimeout(enableButton, 60000);
                                 });
                             } else {
