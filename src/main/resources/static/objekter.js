@@ -4,8 +4,29 @@ $(function(){
     getAllSummonerIds();
     setTimeout(enableButton, 2000);
     getAll();
+    getTime();
 });
+function getTime() {
+    $.get("/getTime", {type: 'Rank'}, function (data) {
+        const originalDateString = data;
+        const date = new Date(originalDateString);
 
+// Adjust the time by adding 4 hours
+        date.setHours(date.getHours() + 2);
+
+// Format the date and time
+        const formattedDate = `${String(date.getDate()).padStart(2, '0')}.${String(
+            date.getMonth() + 1
+        ).padStart(2, '0')}.${date.getFullYear()}`;
+        const formattedTime = `${String(date.getHours()).padStart(2, '0')}:${String(
+            date.getMinutes()
+        ).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+
+// Combine the formatted date and time
+        const formattedDateTime = `${formattedDate} ${formattedTime}`;
+        document.getElementById('rankTime').textContent ='Last updated: '+ formattedDate + ' at '+ formattedTime
+    });
+}
 let riotApiKey;
 
 fetch('/api/riot-api-key')

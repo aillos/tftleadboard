@@ -1,4 +1,4 @@
-package com.aillos.tftleadboard;
+package com.aillos.tftleadboard.riot;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
