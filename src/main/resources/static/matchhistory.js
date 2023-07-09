@@ -223,7 +223,8 @@ function createDivs(puuid) {
                             "KaiSa":"Kaisa",
                             "VelKoz": "Velkoz",
                             "RekSai": "Reksai",
-                            "ChoGath": "Chogath"
+                            "ChoGath": "Chogath",
+                            "BelVeth":"Belveth"
                         };
                         const forImage = nameMappings2[name] || name;
                         const fileName = `./championIcons/${forImage}.png`;
