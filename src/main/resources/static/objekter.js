@@ -1,8 +1,6 @@
 
 $(function(){
-    // resetCache();
     getAllSummonerIds();
-    setTimeout(enableButton, 2000);
     getAll();
     getTime();
 });
@@ -11,10 +9,6 @@ function getTime() {
         const originalDateString = data;
         const date = new Date(originalDateString);
 
-// Adjust the time by adding 4 hours
-      //  date.setHours(date.getHours() + 2);
-
-// Format the date and time
         const formattedDate = `${String(date.getDate()).padStart(2, '0')}.${String(
             date.getMonth() + 1
         ).padStart(2, '0')}.${date.getFullYear()}`;
@@ -22,11 +16,12 @@ function getTime() {
             date.getMinutes()
         ).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
 
-// Combine the formatted date and time
-        const formattedDateTime = `${formattedDate} ${formattedTime}`;
         document.getElementById('rankTime').textContent ='Last updated: '+ formattedDate + ' at '+ formattedTime
     });
 }
+
+let summonerIds = null;
+let isSummonerIdsLoaded = false;
 let riotApiKey;
 
 fetch('/api/riot-api-key')
@@ -43,14 +38,6 @@ function enableButton(){
     document.getElementById("btn").disabled = false;
 }
 
-function resetCache() {
-    localStorage.removeItem('summonerIds');
-    summonerIds = null;
-    isSummonerIdsLoaded = false;
-}
-
-let summonerIds = null;
-let isSummonerIdsLoaded = false;
 
 function getAllSummonerIds() {
     if (summonerIds !== null && isSummonerIdsLoaded) {
@@ -192,64 +179,6 @@ function insertMatch(clickedValue) {
 }
 
 
-function addExistingSummoners() {
-    summonerIds.forEach(summonerId => {
-        const endpoint = `https://euw1.api.riotgames.com/tft/league/v1/entries/by-summoner/${summonerId}?`;
-        fetchDataFromRiotAPI(endpoint)
-            .then(data => {
-                if (data.length > 0) {
-                    const leagueEntry = data[0];
-                    const { leaguePoints, tier, losses, rank, summonerName, wins } = leagueEntry;
-
-                    const storedLeaguePoints = leaguePoints;
-                    const storedLosses = losses;
-                    const storedRank = rank;
-                    const storedSummonerName = summonerName;
-                    const storedWins = wins;
-                    const storedTier = tier;
-
-
-                    const endpoint2 = `https://euw1.api.riotgames.com/tft/summoner/v1/summoners/${summonerId}?`;
-                    fetchDataFromRiotAPI(endpoint2)
-                        .then(data => {
-                            if (data) {
-                                const { id, profileIconId } = data;
-                                const storedSummonerId = id;
-                                const storedSummonerIcon = profileIconId;
-
-                                const Summoner = {
-                                    summonerName: storedSummonerName,
-                                    rank: storedRank,
-                                    tier: storedTier,
-                                    lp: storedLeaguePoints,
-                                    summonerIcon: storedSummonerIcon,
-                                    summonerId: storedSummonerId,
-                                    wins: storedWins,
-                                    losses: storedLosses,
-                                };
-                                $.post("/update", Summoner, function () {
-                                    getAll();
-                                    setTimeout(window.location.href="/", 500);
-                                    setTimeout(enableButton, 60000);
-                                });
-                            } else {
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', );
-                        });
-                } else {
-
-                }
-            })
-            .catch(error => {
-                console.error('Error:', );
-            });
-    });
-
-}
-
-
 function getAll() {
     $.get( "/getAll", function( Summoner ) {
         formaterData(Summoner);
@@ -260,9 +189,6 @@ function deleteAll() {
     $.get( "/deleteAll", function( Summoner ) {
 
     })
-    window.location.href="/";
-}
-function homepage(){
     window.location.href="/";
 }
 
