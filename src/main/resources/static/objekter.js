@@ -12,7 +12,7 @@ function getTime() {
         const date = new Date(originalDateString);
 
 // Adjust the time by adding 4 hours
-        date.setHours(date.getHours() + 2);
+      //  date.setHours(date.getHours() + 2);
 
 // Format the date and time
         const formattedDate = `${String(date.getDate()).padStart(2, '0')}.${String(
