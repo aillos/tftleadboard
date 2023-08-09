@@ -21,10 +21,12 @@ The data is being fetched from the Riot Games API and stored in an SQL Database 
 ## Automation code for the database:
 <details>
   <summary>Update ranks</summary>
-  Done using SQL.
+  <br>
+  
+  *Done using SQL.*
   
   ```sql
-  CREATE PROCEDURE 
+  CREATE PROCEDURE UpdateSummonerData
   AS
   BEGIN
 
@@ -91,6 +93,73 @@ The data is being fetched from the Riot Games API and stored in an SQL Database 
     DEALLOCATE summonerCursor;
   END
   go
+  ```
+  
+</details>
+<details>
+  <summary>Converting the ranks to a comparable int</summary>
+  <br>
+  
+  *Done using SQL.*
+  
+  ```sql
+  CREATE FUNCTION rankToInt(@rankValue VARCHAR(255))
+    RETURNS INT
+AS
+BEGIN
+    DECLARE @sum INT = 0;
+    DECLARE @s VARCHAR(255) = @rankValue;
+
+    SET @s = REPLACE(@s, 'IRON', 'A');
+    SET @s = REPLACE(@s, 'BRONZE', 'B');
+    SET @s = REPLACE(@s, 'SILVER', 'C');
+    SET @s = REPLACE(@s, 'GOLD', 'D');
+    SET @s = REPLACE(@s, 'PLATINUM', 'E');
+    SET @s = REPLACE(@s, 'DIAMOND', 'F');
+    SET @s = REPLACE(@s, 'MASTER', 'G');
+    SET @s = REPLACE(@s, 'GRANDMASTER', 'G');
+    SET @s = REPLACE(@s, 'CHALLENGER', 'G');
+    SET @s = REPLACE(@s, 'IV', 'M');
+    SET @s = REPLACE(@s, 'III', 'L');
+    SET @s = REPLACE(@s, 'II', 'K');
+    SET @s = REPLACE(@s, 'I', 'J');
+
+    DECLARE @x VARCHAR(255) = SUBSTRING(@s, 3, LEN(@s));
+    SET @sum += CAST(@x AS INT);
+
+    IF CAST(@x AS INT) < 10
+        SET @s = SUBSTRING(@s, 1, LEN(@s) - 1);
+    ELSE
+        SET @s = SUBSTRING(@s, 1, LEN(@s) - 2);
+
+    DECLARE @i INT = 1;
+    DECLARE @rankChar CHAR(1);
+
+    WHILE @i <= LEN(@s)
+        BEGIN
+            SET @rankChar = SUBSTRING(@s, @i, 1);
+
+            SET @sum += CASE @rankChar
+                            WHEN 'J' THEN 300
+                            WHEN 'K' THEN 200
+                            WHEN 'L' THEN 100
+                            WHEN 'M' THEN 0
+                            WHEN 'A' THEN 0
+                            WHEN 'B' THEN 400
+                            WHEN 'C' THEN 800
+                            WHEN 'D' THEN 1200
+                            WHEN 'E' THEN 1600
+                            WHEN 'F' THEN 2000
+                            WHEN 'G' THEN 2400
+                            ELSE 0
+                END;
+
+            SET @i += 1;
+        END;
+
+    RETURN @sum;
+END
+go
   ```
   
 </details>
