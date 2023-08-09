@@ -9,6 +9,8 @@ The data is being fetched from the Riot Games API and stored in an SQL Database 
 - [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [SQL](https://www.microsoft.com/en-us/sql-server/)
+- [PowerShell](https://learn.microsoft.com/en-us/powershell/)
 - With use of [Maven](https://maven.apache.org/)
 
 ## Built with:
