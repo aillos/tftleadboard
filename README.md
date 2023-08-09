@@ -165,6 +165,66 @@ go
   ```
   
 </details>
+<details>
+  <summary>Automating the update part</summary>
+  <br>
+  
+  *Done using PowerShell.*
+  
+  ```powershell
+  # Set connection details
+$serverName = ""
+$databaseName = ""
+$username = ""
+$password = ""
+
+function Start-Delay {
+    param([int]$Minutes)
+    Start-Sleep -Seconds ($Minutes * 60)
+}
+
+$totalRunTime = 57
+
+$startTime = Get-Date
+
+$localTimeZoneOffset = [System.TimeZoneInfo]::Local.GetUtcOffset((Get-Date)).TotalHours
+
+while ((Get-Date) -lt ($startTime.AddMinutes($totalRunTime))) {
+    try {
+        $connectionString = "Server=$serverName;Database=$databaseName;User ID=$username;Password=$password;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+        $connection = New-Object System.Data.SqlClient.SqlConnection($connectionString)
+
+        $connection.Open()
+
+        $query = "EXEC UpdateSummonerData"
+        $command = New-Object System.Data.SqlClient.SqlCommand($query, $connection)
+        $result = $command.ExecuteReader()
+
+        $connection.Close()
+
+        $updateConnectionString = "Server=$serverName;Database=$databaseName;User ID=$username;Password=$password;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+        $updateConnection = New-Object System.Data.SqlClient.SqlConnection($updateConnectionString)
+
+        $updateConnection.Open()
+
+        $currentTime = Get-Date -Format "dd. MMMM yyyy HH:mm:ss"
+        $currentTimeGMT = (Get-Date).AddHours(-$localTimeZoneOffset)
+        $updateQuery = "UPDATE Info SET Time = '$currentTimeGMT' WHERE Type='Rank'"
+        $updateCommand = New-Object System.Data.SqlClient.SqlCommand($updateQuery, $updateConnection)
+        $updateResult = $updateCommand.ExecuteNonQuery()
+
+        $updateConnection.Close()
+    }
+    catch {
+        Write-Host "Error occurred: $($_.Exception.Message)"
+    }
+
+    Start-Delay -Minutes 3
+}
+
+  ```
+  
+</details>
 
 This is by no means licensed by Riot Games themself, only meant as a project for me, myself and I to improve and to have as a fun tool for me and my friends.
 Thank you.
