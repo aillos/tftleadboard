@@ -226,5 +226,5 @@ while ((Get-Date) -lt ($startTime.AddMinutes($totalRunTime))) {
   
 </details>
 
-This is by no means licensed by Riot Games themself, only meant as a project for me, myself and I to improve and to have as a fun tool for me and my friends.
-Thank you.
+*This is by no means licensed by Riot Games themself, only meant as a project for me, myself and I to improve and to have as a fun tool for me and my friends.
+Thank you.*
