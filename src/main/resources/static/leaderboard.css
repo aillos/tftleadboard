@@ -36,7 +36,7 @@
 
 
 #rankTime{
-    margin-right: 43%;
+    margin-right: 600px;
 }
 .players.hovered {
     background-color: #3e4044;
@@ -46,7 +46,7 @@
 .image-button{
     border-radius: 2px;
     width:105px;
-    margin-right: 400px;
+    margin-right: 100px;
     margin-left: auto;
     font-size: 18px;
     display: flex;
