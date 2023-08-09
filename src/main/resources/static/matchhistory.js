@@ -70,7 +70,7 @@ function createDivs(puuid) {
     let tacticianArray = [];
     let unitArray = [];
     let itemArray = [];
-    let augmentArray = [];
+    //let augmentArray = [];
     let traitArray = [];
     for (let i = 0; i < 10; i++) {
 
@@ -135,7 +135,7 @@ function createDivs(puuid) {
 
                     matchDiv.appendChild(littleLegend);
                     tacticianArray.push(tactician.image);
-
+                    /*
                     //Augments
                     const augmentIcons = document.createElement('div');
                     augmentIcons.setAttribute("class", "augment-icons");
@@ -171,7 +171,7 @@ function createDivs(puuid) {
                     }
 
                     matchDiv.appendChild(augmentIcons);
-
+                    */
                     //Units
                     const championIcons = document.createElement('div');
                     championIcons.setAttribute("class", "champion-icons");
@@ -380,8 +380,8 @@ function createDivs(puuid) {
                         document.getElementById("unit").src=`./championIcons/`+unit+`.png`;
                         const item = logMostOccurringValue(itemArray);
                         document.getElementById("item").src=`./tftItems/`+item+`.png`;
-                        const augment = logMostOccurringValue(augmentArray);
-                        document.getElementById("augment").src=`./tftAugments/`+augment;
+                        /*const augment = logMostOccurringValue(augmentArray);
+                        document.getElementById("augment").src=`./tftAugments/`+augment;*/
                         const trait = logMostOccurringValue(traitArray);
                         document.getElementById("trait").src=`./tftTraits/`+trait+`_White.png`;
                         console.log(placementArray);

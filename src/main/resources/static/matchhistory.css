@@ -313,7 +313,7 @@ abbr:hover::after {
 .playerTrait{
     position: absolute;
     margin-top: 40px;
-    margin-left: 400px;
+    margin-left: 360px;
     width:75px;
     text-align: center;
     align-items: center;
@@ -323,14 +323,14 @@ abbr:hover::after {
 .playerUnit{
     position: absolute;
     margin-top: 40px;
-    margin-left: 160px;
+    margin-left: 180px;
     width:75px;
     text-align: center;
     align-items: center;
 }
 .playerItem{
     position: absolute;
-    margin-left: 240px;
+    margin-left: 270px;
     margin-top: 40px;
     width:75px;
     text-align: center;

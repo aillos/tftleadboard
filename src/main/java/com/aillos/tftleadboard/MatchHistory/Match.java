@@ -9,10 +9,10 @@ public class Match {
     private String traits;
     private String units;
     private String mode;
-    private String augments;
+    //private String augments;
     private String date;
 
-    public Match(String matchId, String puuid, String tactician, int placement, int level, String traits, String units, String mode, String augments, String date) {
+    public Match(String matchId, String puuid, String tactician, int placement, int level, String traits, String units, String mode, String date) {
         this.matchId = matchId;
         this.puuid = puuid;
         this.tactician = tactician;
@@ -21,7 +21,7 @@ public class Match {
         this.traits = traits;
         this.units=units;
         this.mode=mode;
-        this.augments=augments;
+        //this.augments=augments;
         this.date=date;
     }
 
@@ -94,14 +94,14 @@ public class Match {
         this.mode = mode;
     }
 
-    public String getAugments() {
+    /*public String getAugments() {
         return augments;
     }
 
     public void setAugments(String augments) {
         this.augments = augments;
     }
-
+    */
     public String getDate() {
         return date;
     }
