@@ -222,7 +222,6 @@ function createDivs(puuid) {
                         const nameMappings2 = {
                             "KaiSa":"Kaisa",
                             "VelKoz": "Velkoz",
-                            "RekSai": "Reksai",
                             "ChoGath": "Chogath",
                             "BelVeth":"Belveth"
                         };
@@ -258,15 +257,17 @@ function createDivs(puuid) {
                         const starDiv = document.createElement("div");
                         starDiv.setAttribute("class", "stars");
                         const stars = {
+                            4: '★★★★',
                             3: '★★★',
                             2: '★★',
                             1: '★',
                             default: ''
                         }
                         const starColor = {
+                            4: '#11b288',
                             3: '#f3ce56',
                             2: '#b6d0d2',
-                            1: '#e0864f',
+                            1: '#d27c48',
                             default: ''
                         }
                         const finalStarColor = starColor[unitsJSON.stars] || starColor.default;
@@ -480,7 +481,7 @@ function addMatch(matchId) {
                 const itemID = playerData.companion.item_ID;
 
                 // Fetch the JSON data for tacticians
-                fetch('https://ddragon.leagueoflegends.com/cdn/13.13.1/data/en_US/tft-tactician.json')
+                fetch('https://ddragon.leagueoflegends.com/cdn/13.15.1/data/en_US/tft-tactician.json')
                     .then(response => response.json())
                     .then(jsonData => {
 
@@ -513,7 +514,7 @@ function addMatch(matchId) {
                             }
 
                             // Fetch the JSON data for augments
-                            fetch('https://ddragon.leagueoflegends.com/cdn/13.13.1/data/en_US/tft-augments.json')
+                            fetch('https://ddragon.leagueoflegends.com/cdn/13.15.1/data/en_US/tft-augments.json')
                                 .then(response => response.json())
                                 .then(augmentData => {
                                     const augments = playerData.augments.map(augmentId => {
