@@ -480,7 +480,7 @@ function addMatch(matchId) {
                 const itemID = playerData.companion.item_ID;
 
                 // Fetch the JSON data for tacticians
-                fetch('https://ddragon.leagueoflegends.com/cdn/13.13.1/data/en_US/tft-tactician.json')
+                fetch('https://ddragon.leagueoflegends.com/cdn/13.16.1/data/en_US/tft-tactician.json')
                     .then(response => response.json())
                     .then(jsonData => {
 
@@ -513,7 +513,7 @@ function addMatch(matchId) {
                             }
 
                             // Fetch the JSON data for augments
-                            fetch('https://ddragon.leagueoflegends.com/cdn/13.13.1/data/en_US/tft-augments.json')
+                            fetch('https://ddragon.leagueoflegends.com/cdn/13.16.1/data/en_US/tft-augments.json')
                                 .then(response => response.json())
                                 .then(augmentData => {
                                     const augments = playerData.augments.map(augmentId => {

@@ -196,7 +196,7 @@ function formaterData(Summoner) {
     for (const [index, sum] of Summoner.entries()) {
 
         document.getElementById("summoner"+(index+1)).textContent=(index+1)+". "+sum.summonerName;
-        document.getElementById("summonerIcon"+(index+1)).src=`https://ddragon.leagueoflegends.com/cdn/13.13.1/img/profileicon/`+sum.summonerIcon+`.png`;
+        document.getElementById("summonerIcon"+(index+1)).src=`https://ddragon.leagueoflegends.com/cdn/13.16.1/img/profileicon/`+sum.summonerIcon+`.png`;
         document.getElementById("games"+(index+1)).textContent="Games played: " + (sum.wins+sum.losses);
         document.getElementById("wins"+(index+1)).textContent="Wins: " + sum.wins;
         document.getElementById("losses"+(index+1)).textContent="Losses: " + sum.losses;
