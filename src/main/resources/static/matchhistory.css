@@ -155,7 +155,7 @@ abbr:hover::after {
     padding-left: 10px;
     padding-right: 10px;
     margin-bottom: 0;
-    margin-left:51px;
+    margin-left:770px;
     margin-right: 10px;
 }
 
@@ -170,6 +170,18 @@ abbr:hover::after {
     margin-left:800px;
     margin-right: 10px;
 
+}
+.mode{
+    position:absolute;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top:-109px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 0;
+    margin-left:52px;
+    margin-right: 10px;
+    width:80px;
 }
 .trait-icons {
     display: flex;

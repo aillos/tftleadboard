@@ -136,6 +136,21 @@ function createDivs(puuid) {
                     matchDiv.appendChild(littleLegend);
                     tacticianArray.push(tactician.image);
 
+                    const mode = document.createElement('div');
+                    mode.setAttribute("class", "mode");
+                    const whichMode = {
+                        1160: 'Double Up',
+                        1090: 'Normal',
+                        1170: 'Event',
+                        1130: 'Hyper Roll',
+                        1100: 'Ranked',
+                        default: 'Ranked'
+                    };
+                    mode.textContent = whichMode[match.mode] || whichMode.default;
+                    mode.style.color=placementIcon.style.backgroundColor;
+                    matchDiv.appendChild(mode);
+
+/*
                     //Augments
                     const augmentIcons = document.createElement('div');
                     augmentIcons.setAttribute("class", "augment-icons");
@@ -171,7 +186,7 @@ function createDivs(puuid) {
                     }
 
                     matchDiv.appendChild(augmentIcons);
-
+*/
                     //Units
                     const championIcons = document.createElement('div');
                     championIcons.setAttribute("class", "champion-icons");
@@ -374,16 +389,16 @@ function createDivs(puuid) {
 
 
                     //Finish the match
-                    if (i === 10){
+                    if (i === 9){
                         const icon = logMostOccurringValue(tacticianArray);
                         document.getElementById("icon").src=`./tftTacticians/`+icon+`.png`;
-                        const unit = logMostOccurringValue(unitArray);
+                        const unit = logMostOccurringValues(unitArray);
                         document.getElementById("unit").src=`./championIcons/`+unit+`.png`;
-                        const item = logMostOccurringValue(itemArray);
+                        const item = logMostOccurringValues(itemArray);
                         document.getElementById("item").src=`./tftItems/`+item+`.png`;
                         /*const augment = logMostOccurringValue(augmentArray);
                         document.getElementById("augment").src=`./tftAugments/`+augment;*/
-                        const trait = logMostOccurringValue(traitArray);
+                        const trait = logMostOccurringValues(traitArray);
                         document.getElementById("trait").src=`./tftTraits/`+trait+`_White.png`;
                         console.log(placementArray);
                     }
@@ -424,6 +439,19 @@ function logMostOccurringValue(array) {
         console.log("No values in the array.");
     }
 
+}
+function logMostOccurringValues(array, n) {
+    const countedValue = countOccurrences(array);
+    const sortedCountedValue = Object.entries(countedValue).sort((a, b) => b[1] - a[1]);
+
+    if (sortedCountedValue.length > 0) {
+        const mostOccurringValues = sortedCountedValue.slice(0, 3).map(item => item[0]);
+        console.log("Top " + 3 + " most occurring values:", mostOccurringValues);
+        return mostOccurringValues;
+    } else {
+        console.log("No values in the array.");
+        return [];
+    }
 }
 
 
