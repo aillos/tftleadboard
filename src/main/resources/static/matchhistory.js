@@ -135,7 +135,7 @@ function createDivs(puuid) {
 
                     matchDiv.appendChild(littleLegend);
                     tacticianArray.push(tactician.image);
-                    /*
+
                     //Augments
                     const augmentIcons = document.createElement('div');
                     augmentIcons.setAttribute("class", "augment-icons");
@@ -171,7 +171,7 @@ function createDivs(puuid) {
                     }
 
                     matchDiv.appendChild(augmentIcons);
-                    */
+
                     //Units
                     const championIcons = document.createElement('div');
                     championIcons.setAttribute("class", "champion-icons");
@@ -374,7 +374,7 @@ function createDivs(puuid) {
 
 
                     //Finish the match
-                    if (i === 9){
+                    if (i === 10){
                         const icon = logMostOccurringValue(tacticianArray);
                         document.getElementById("icon").src=`./tftTacticians/`+icon+`.png`;
                         const unit = logMostOccurringValue(unitArray);
@@ -481,7 +481,7 @@ function addMatch(matchId) {
                 const itemID = playerData.companion.item_ID;
 
                 // Fetch the JSON data for tacticians
-                fetch('https://ddragon.leagueoflegends.com/cdn/13.15.1/data/en_US/tft-tactician.json')
+                fetch('https://ddragon.leagueoflegends.com/cdn/13.18.1/data/en_US/tft-tactician.json')
                     .then(response => response.json())
                     .then(jsonData => {
 
@@ -514,7 +514,7 @@ function addMatch(matchId) {
                             }
 
                             // Fetch the JSON data for augments
-                            fetch('https://ddragon.leagueoflegends.com/cdn/13.15.1/data/en_US/tft-augments.json')
+                            fetch('https://ddragon.leagueoflegends.com/cdn/13.18.1/data/en_US/tft-augments.json')
                                 .then(response => response.json())
                                 .then(augmentData => {
                                     const augments = playerData.augments.map(augmentId => {
