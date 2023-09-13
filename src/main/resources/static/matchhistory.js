@@ -150,7 +150,7 @@ function createDivs(puuid) {
                     mode.style.color=placementIcon.style.backgroundColor;
                     matchDiv.appendChild(mode);
 
-/*
+
                     //Augments
                     const augmentIcons = document.createElement('div');
                     augmentIcons.setAttribute("class", "augment-icons");
@@ -186,7 +186,7 @@ function createDivs(puuid) {
                     }
 
                     matchDiv.appendChild(augmentIcons);
-*/
+
                     //Units
                     const championIcons = document.createElement('div');
                     championIcons.setAttribute("class", "champion-icons");
