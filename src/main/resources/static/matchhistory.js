@@ -538,6 +538,7 @@ function addMatch(matchId) {
                             for (let i = 0; i < traitData.length; i++) {
                                 const startIndex = traitData[i].name.indexOf("_");
                                 const substring = traitData[i].name.substr(startIndex + 1);
+                                //if (substring == "");
                                 synergies = synergies + `{"name":"${substring}","units":${JSON.stringify(traitData[i].num_units)},"style":${traitData[i].style}}**`;
                             }
 
