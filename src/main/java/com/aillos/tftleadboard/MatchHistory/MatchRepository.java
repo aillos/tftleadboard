@@ -18,9 +18,9 @@ public class MatchRepository {
     private Logger logger = LoggerFactory.getLogger(MatchRepository.class);
 
     public boolean saveMatch(Match match) {
-        String sql = "INSERT INTO MatchHistories (matchId, puuid, tactician, units, traits, placement, level, mode, date) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO MatchHistories (matchId, puuid, tactician, units, traits, placement, level, mode, date, augments) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try {
-            db.update(sql, match.getMatchId(), match.getPuuid(), match.getTactician(), match.getUnits(), match.getTraits(), match.getPlacement(), match.getLevel(), match.getMode(), match.getDate());
+            db.update(sql, match.getMatchId(), match.getPuuid(), match.getTactician(), match.getUnits(), match.getTraits(), match.getPlacement(), match.getLevel(), match.getMode(), match.getDate(), match.getAugments());
             return true;
         } catch (Exception e) {
             logger.error("Feil i lagre summoner " + e);
@@ -36,9 +36,9 @@ public class MatchRepository {
 
 
     public boolean updateMatch(Match match) {
-        String sql = "UPDATE MatchHistories SET matchId=?, mode=?, tactician=?, units=?, traits=?, placement=?, level=?, date=? WHERE puuid=?";
+        String sql = "UPDATE MatchHistories SET matchId=?, mode=?, tactician=?, units=?, traits=?, placement=?, level=?, date=?, augments=? WHERE puuid=?";
         try {
-            db.update(sql, match.getMatchId(), match.getPuuid(), match.getTactician(), match.getUnits(), match.getTraits(), match.getPlacement(), match.getLevel(), match.getMode(), match.getDate());
+            db.update(sql, match.getMatchId(), match.getPuuid(), match.getTactician(), match.getUnits(), match.getTraits(), match.getPlacement(), match.getLevel(), match.getMode(), match.getDate(), match.getAugments());
             return true;
         } catch (Exception e) {
             logger.error("Feil i lagre summoner " + e);

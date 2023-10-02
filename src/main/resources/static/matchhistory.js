@@ -66,6 +66,7 @@ function test() {
     document.getElementById("test").textContent = data;
 }
 function createDivs(puuid) {
+    console.log("Entering createDivs function");
     let placementArray = [];
     let tacticianArray = [];
     let unitArray = [];
