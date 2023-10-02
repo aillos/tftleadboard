@@ -350,15 +350,75 @@ abbr:hover::after {
     align-items: center;
 }
 
-.playerAugment img,
-.playerItem img,
-.playerUnit img{
+.playerAugment img
+/*.playerItem img,*/{
     align-self: center;
     width:40px;
     height:40px;
     border:2px solid transparent;
     border-radius: 10px;
     margin-bottom: 7px;
+}
+.playerItem, .playerUnit{
+    width:140px;
+    heigh:100px;
+}
+.item1 img{
+    align-self: center;
+    width:40px;
+    height:40px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
+}
+
+.item2 img{
+    align-self: center;
+    width:40px;
+    height:40px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
+}
+.item3 img{
+    align-self: center;
+    width:40px;
+    height:40px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
+}
+
+.unit1 img{
+    align-self: center;
+    width:40px;
+    height:40px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
+}
+
+.unit2 img{
+    align-self: center;
+    width:40px;
+    height:40px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
+}
+.unit3 img{
+    align-self: center;
+    width:40px;
+    height:40px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
 }
 
 .playerTrait img{

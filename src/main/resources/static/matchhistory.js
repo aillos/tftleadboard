@@ -70,7 +70,7 @@ function createDivs(puuid) {
     let tacticianArray = [];
     let unitArray = [];
     let itemArray = [];
-    //let augmentArray = [];
+    let augmentArray = [];
     let traitArray = [];
     for (let i = 0; i < 10; i++) {
 
@@ -393,13 +393,21 @@ function createDivs(puuid) {
                         const icon = logMostOccurringValue(tacticianArray);
                         document.getElementById("icon").src=`./tftTacticians/`+icon+`.png`;
                         const unit = logMostOccurringValues(unitArray);
-                        document.getElementById("unit").src=`./championIcons/`+unit+`.png`;
+                        document.getElementById("unit1").src=`./championIcons/`+unit[0]+`.png`;
+                        document.getElementById("unit2").src=`./championIcons/`+unit[1]+`.png`;
+                        document.getElementById("unit3").src=`./championIcons/`+unit[2]+`.png`;
                         const item = logMostOccurringValues(itemArray);
-                        document.getElementById("item").src=`./tftItems/`+item+`.png`;
-                        /*const augment = logMostOccurringValue(augmentArray);
-                        document.getElementById("augment").src=`./tftAugments/`+augment;*/
+                        document.getElementById("item1").src=`./tftItems/`+item[0]+`.png`;
+                        document.getElementById("item2").src=`./tftItems/`+item[1]+`.png`;
+                        document.getElementById("item3").src=`./tftItems/`+item[2]+`.png`;
+                        const augment = logMostOccurringValues(augmentArray);
+                        document.getElementById("augment1").src=`./tftAugments/`+augment[0];
+                        document.getElementById("augment2").src=`./tftAugments/`+augment[1];
+                        document.getElementById("augment3").src=`./tftAugments/`+augment[2];
                         const trait = logMostOccurringValues(traitArray);
-                        document.getElementById("trait").src=`./tftTraits/`+trait+`_White.png`;
+                        document.getElementById("trait1").src=`./tftTraits/`+trait[0]+`_White.png`;
+                        document.getElementById("trait2").src=`./tftTraits/`+trait[1]+`_White.png`;
+                        document.getElementById("trait3").src=`./tftTraits/`+trait[2]+`_White.png`;
                         console.log(placementArray);
                     }
                     document.getElementById('matchhistory').appendChild(matchDiv);
