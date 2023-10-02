@@ -99,6 +99,74 @@ The data is being fetched from the Riot Games API and stored in an SQL Database 
   
 </details>
 <details>
+  <summary>Update summoner icon and name</summary>
+  <br>
+  
+  *Done using SQL.*
+  
+  ```sql
+ CREATE PROCEDURE dbo.UpdateIconName
+AS
+BEGIN
+    -- Declare variables
+    DECLARE @ret INT, @response NVARCHAR(MAX);
+    DECLARE @summonerId NVARCHAR(50);
+    DECLARE @name VARCHAR(255);
+    DECLARE @icon INT;
+    DECLARE @httpClient INT;
+
+    -- Cursor to iterate over existing summoners
+    DECLARE summonerCursor CURSOR FOR
+        SELECT summonerId
+        FROM Summoner;
+
+    OPEN summonerCursor;
+    FETCH NEXT FROM summonerCursor INTO @summonerId;
+
+    WHILE @@FETCH_STATUS = 0
+        BEGIN
+            -- Fetch data from Riot API
+            SET @ret = 0; -- Initialize return code
+            SET @response = NULL; -- Initialize response
+
+            -- Build the URL with the current summonerId
+            DECLARE @url NVARCHAR(4000) = N'';
+
+            EXEC @ret = sp_invoke_external_rest_endpoint
+                        @url = @url,
+                        @method = 'GET',
+                        @response = @response OUTPUT;
+
+            -- Print the response JSON
+            --PRINT @response;
+
+            IF @ret = 0 AND @response IS NOT NULL
+                BEGIN
+                    -- Parse the JSON response
+                    SELECT @name = JSON_VALUE(@response, '$.result.name'),
+                           @icon = JSON_VALUE(@response, '$.result.profileIconId');
+
+                    -- Check if the summonerName property exists
+
+                END
+
+            -- Update existing summoner data
+            UPDATE Summoner
+            SET summonerName = @name,
+                summonerIcon = @icon
+            WHERE summonerId = @summonerId;
+
+            FETCH NEXT FROM summonerCursor INTO @summonerId;
+        END
+
+    CLOSE summonerCursor;
+    DEALLOCATE summonerCursor;
+END
+go
+  ```
+  
+</details>
+<details>
   <summary>Converting the ranks to a comparable int</summary>
   <br>
   
