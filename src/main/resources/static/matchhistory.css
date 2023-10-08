@@ -321,7 +321,7 @@ abbr:hover::after {
     display: flex;
     align-items: center;
     margin-left: 125px;
-    margin-top: 135px;
+    margin-top: 145px;
 }
 .playerTrait{
     position: absolute;
@@ -335,35 +335,73 @@ abbr:hover::after {
 
 .playerUnit{
     position: absolute;
-    margin-top: 40px;
-    margin-left: 180px;
-    width:75px;
-    text-align: center;
+    margin-top: 10px;
+    margin-left: 190px;
+    width:150px;
+    text-align: left;
     align-items: center;
 }
 .playerItem{
     position: absolute;
-    margin-left: 270px;
-    margin-top: 40px;
-    width:75px;
-    text-align: center;
+    margin-top: 75px;
+    margin-left: 190px;
+    width:150px;
+    text-align: left;
     align-items: center;
 }
 
-.playerAugment img
-/*.playerItem img,*/{
+.playerAugment {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 340px;
+    width:150px;
+    text-align: left;
+    align-items: center;
+}
+.augment1 img{
+
+    margin-top:15px;
+    margin-left:-25px;
     align-self: center;
     width:40px;
     height:40px;
     border:2px solid transparent;
     border-radius: 10px;
     margin-bottom: 7px;
+    position:absolute;
+}
+
+.augment2 img{
+    margin-top:15px;
+    margin-left:13px;
+    align-self: center;
+    width:40px;
+    height:40px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
+    z-index:10;
+}
+.augment3 img{
+    margin-top:15px;
+    margin-left:51px;
+    width:40px;
+    height:40px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
+    z-index:5;
 }
 .playerItem, .playerUnit{
     width:140px;
     heigh:100px;
 }
 .item1 img{
+
+    margin-top:15px;
+    margin-left:-25px;
     align-self: center;
     width:40px;
     height:40px;
@@ -374,6 +412,8 @@ abbr:hover::after {
 }
 
 .item2 img{
+    margin-top:15px;
+    margin-left:13px;
     align-self: center;
     width:40px;
     height:40px;
@@ -381,18 +421,27 @@ abbr:hover::after {
     border-radius: 10px;
     margin-bottom: 7px;
     position:absolute;
+    z-index:10;
 }
 .item3 img{
-    align-self: center;
+    margin-top:15px;
+    margin-left:51px;
     width:40px;
     height:40px;
     border:2px solid transparent;
     border-radius: 10px;
     margin-bottom: 7px;
     position:absolute;
+    z-index:5;
+}
+.playerUnit > p{
+    margin-left:-200px;
+
 }
 
 .unit1 img{
+    margin-top:15px;
+    margin-left:-25px;
     align-self: center;
     width:40px;
     height:40px;
@@ -403,6 +452,8 @@ abbr:hover::after {
 }
 
 .unit2 img{
+    margin-top:15px;
+    margin-left:13px;
     align-self: center;
     width:40px;
     height:40px;
@@ -410,33 +461,63 @@ abbr:hover::after {
     border-radius: 10px;
     margin-bottom: 7px;
     position:absolute;
+    z-index:10;
 }
 .unit3 img{
-    align-self: center;
+    margin-top:15px;
+    margin-left:51px;
     width:40px;
     height:40px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
+    z-index:5;
+}
+
+.playerTrait {
+    position: absolute;
+    margin-top: 80px;
+    margin-left: 345px;
+    width:150px;
+    text-align: left;
+    align-items: center;
+}
+.trait1 img{
+
+    margin-top:15px;
+    margin-left:-25px;
+    align-self: center;
+    width:30px;
+    height:30px;
     border:2px solid transparent;
     border-radius: 10px;
     margin-bottom: 7px;
     position:absolute;
 }
 
-.playerTrait img{
-    margin-top: 5px;
-align-self: center;
-width:30px;
-height:30px;
-border:2px solid transparent;
-border-radius: 10px;
-margin-bottom: 12px;
+.trait2 img{
+    margin-top:15px;
+    margin-left:13px;
+    align-self: center;
+    width:30px;
+    height:30px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
+    z-index:10;
 }
-.playerAugment{
-    margin-top: 40px;
-    margin-left: 320px;
-    position: absolute;
-    width:75px;
-    text-align: center;
-    align-items: center;
+.trait3 img{
+    margin-top:15px;
+    margin-left:51px;
+    width:30px;
+    height:30px;
+    border:2px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    position:absolute;
+    z-index:5;
 }
 
 .augmentText{
