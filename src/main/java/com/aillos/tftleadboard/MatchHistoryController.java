@@ -22,5 +22,21 @@ public class MatchHistoryController {
         headers.setContentType(MediaType.TEXT_HTML);
         return new ResponseEntity<>(htmlBytes, headers, HttpStatus.OK);
     }
+    @GetMapping("/teambuilder")
+    public ResponseEntity<byte[]> goToTeamBuilder() throws IOException {
+        ClassPathResource htmlResource = new ClassPathResource("static/board.html");
+        byte[] htmlBytes = StreamUtils.copyToByteArray(htmlResource.getInputStream());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_HTML);
+        return new ResponseEntity<>(htmlBytes, headers, HttpStatus.OK);
+    }
+    @GetMapping("/info")
+    public ResponseEntity<byte[]> goToInfo() throws IOException {
+        ClassPathResource htmlResource = new ClassPathResource("static/info.html");
+        byte[] htmlBytes = StreamUtils.copyToByteArray(htmlResource.getInputStream());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_HTML);
+        return new ResponseEntity<>(htmlBytes, headers, HttpStatus.OK);
+    }
 
 }

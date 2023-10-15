@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Helpful info</title>
+    <script src="navigation.js"></script>
     <link rel="stylesheet" href="help.css">
+    <link rel="stylesheet" href="nav.css">
 </head>
 <body>
+<div class="navigation">
+    <div class="nav" id="home" onclick="homepage()">Home</div>
+    <div class="nav" id="teambuilder" onclick="teambuilder()">Team Builder</div>
+    <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQXGfKXwmtXV3JXkkvFW9kcvXtWdEpXq-5uohygcek-qM19CvuWTZYf5VwrgXqwMBVLhVomP0yp_jEZ/pubhtml" target="Sologesang Comp List">
+        <div class="nav" id="teamcomps">Team Comps</div>
+    </a>
+    <div class="nav" id="contact" onclick="contact()">Contact</div>
+</div>
 <div class="info">
     <img id="augments" src="./info/augmentChance.png">
     <img id="chemMods" src="./info/chemMods.png">

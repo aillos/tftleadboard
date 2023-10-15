@@ -6,8 +6,10 @@
     <title>Leaderboard</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./objekter.js"></script>
+    <script src="./navigation.js"></script>
     <link rel="stylesheet" href="leaderboard.css">
     <link rel="stylesheet" href="topsection.css">
+    <link rel="stylesheet" href="nav.css">
     <link rel = "icon" href =
             "icons/tft.png"
           type = "image/x-icon">
@@ -19,6 +21,14 @@
         </div>
     </div>
 </div>
+    <div class="navigation">
+        <div class="nav" id="teambuilder" onclick="teambuilder()">Team Builder</div>
+        <div class="nav" id="helpfulinfo" onclick="helpinfo()">Helpful Info</div>
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQXGfKXwmtXV3JXkkvFW9kcvXtWdEpXq-5uohygcek-qM19CvuWTZYf5VwrgXqwMBVLhVomP0yp_jEZ/pubhtml" target="Sologesang Comp List">
+            <div class="nav" id="teamcomps">Team Comps</div>
+        </a>
+        <div class="nav" id="contact" onclick="contact()">Contact</div>
+    </div>
 <div class="players">
     <div id="rankTime"></div>
     <!-- <button class="image-button" id="btn" disabled="" onclick=addExistingSummoners()>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexagonal Layout</title>
+    <link rel="stylesheet" href="board.css">
+    <script src="./board.js"></script>
+    <script src="./navigation.js"></script>
+    <link rel="stylesheet" href="nav.css">
+</head>
+<body>
+<div class="navigation">
+    <div class="nav" id="home" onclick="homepage()">Home</div>
+    <div class="nav" id="helpfulinfo" onclick="helpinfo()">Helpful Info</div>
+    <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQXGfKXwmtXV3JXkkvFW9kcvXtWdEpXq-5uohygcek-qM19CvuWTZYf5VwrgXqwMBVLhVomP0yp_jEZ/pubhtml" target="Sologesang Comp List">
+        <div class="nav" id="teamcomps">Team Comps</div>
+    </a>
+    <div class="nav" id="contact" onclick="contact()">Contact</div>
+</div>
+<div class="main">
+    <div class="container">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="refresh">
+    <button class="image-button" id="btn2" onclick=homepage()>
+        <img src="./icons/infoicon.png" alt="Back" style="display: inline-block">
+        <p style="display: inline-block">Drag and drop a champion to get started. Click to remove.</p>
+    </button>
+    </div>
+    <div class="imagecontainer">
+    <div class="image-row onecost">
+        <img src="./championIcons/Cassiopeia.png" class="draggable-image" draggable="true" id="Cassiopeia">
+        <img src="/championIcons/Chogath.png" class="draggable-image" draggable="true" id="ChoGath">
+        <img src="./championIcons/Graves.png" class="draggable-image" draggable="true" id="Graves">
+        <img src="/championIcons/Illaoi.png" class="draggable-image" draggable="true" id="Illaoi">
+        <img src="./championIcons/Irelia.png" class="draggable-image" draggable="true" id="Irelia">
+        <img src="/championIcons/Jhin.png" class="draggable-image" draggable="true" id="Jhin">
+        <img src="./championIcons/Kayle.png" class="draggable-image" draggable="true" id="Kayle">
+        <img src="/championIcons/Malzahar.png" class="draggable-image" draggable="true" id="Malzahar">
+        <img src="./championIcons/Milio.png" class="draggable-image" draggable="true" id="Milio">
+        <img src="/championIcons/Orianna.png" class="draggable-image" draggable="true" id="Orianna">
+        <img src="./championIcons/Poppy.png" class="draggable-image" draggable="true" id="Poppy">
+        <img src="/championIcons/Renekton.png" class="draggable-image" draggable="true" id="Renekton">
+        <img src="/championIcons/Samira.png" class="draggable-image" draggable="true" id="Samira">
+    </div>
+    <div class="image-row twocost">
+        <img src="./championIcons/Ashe.png" class="draggable-image" draggable="true" id="Ashe">
+        <img src="/championIcons/Galio.png" class="draggable-image" draggable="true" id="Galio">
+        <img src="./championIcons/Jinx.png" class="draggable-image" draggable="true" id="Jinx">
+        <img src="/championIcons/Kassadin.png" class="draggable-image" draggable="true" id="Kassadin">
+        <img src="./championIcons/Naafiri.png" class="draggable-image" draggable="true" id="Naafiri">
+        <img src="/championIcons/Qiyana.png" class="draggable-image" draggable="true" id="Qiyana">
+        <img src="./championIcons/Sett.png" class="draggable-image" draggable="true" id="Sett">
+        <img src="/championIcons/Soraka.png" class="draggable-image" draggable="true" id="Soraka">
+        <img src="./championIcons/Swain.png" class="draggable-image" draggable="true" id="Swain">
+        <img src="/championIcons/Taliyah.png" class="draggable-image" draggable="true" id="Taliyah">
+        <img src="./championIcons/TwistedFate.png" class="draggable-image" draggable="true" id="TwistedFate">
+        <img src="/championIcons/Vi.png" class="draggable-image" draggable="true" id="Vi">
+        <img src="/championIcons/Warwick.png" class="draggable-image" draggable="true" id="Warwick">
+    </div>
+    <div class="image-row threecost">
+        <img src="./championIcons/Darius.png" class="draggable-image" draggable="true" id="Darius">
+        <img src="/championIcons/Ekko.png" class="draggable-image" draggable="true" id="Ekko">
+        <img src="./championIcons/Jayce.png" class="draggable-image" draggable="true" id="Jayce">
+        <img src="/championIcons/Karma.png" class="draggable-image" draggable="true" id="Karma">
+        <img src="./championIcons/Katarina.png" class="draggable-image" draggable="true" id="Katarina">
+        <img src="/championIcons/MissFortune.png" class="draggable-image" draggable="true" id="MissFortune">
+        <img src="./championIcons/Nautilus.png" class="draggable-image" draggable="true" id="Nautilus">
+        <img src="/championIcons/Neeko.png" class="draggable-image" draggable="true" id="Neeko">
+        <img src="./championIcons/RekSai.png" class="draggable-image" draggable="true" id="RekSai">
+        <img src="/championIcons/Sona.png" class="draggable-image" draggable="true" id="Sona">
+        <img src="./championIcons/Taric.png" class="draggable-image" draggable="true" id="Taric">
+        <img src="/championIcons/Velkoz.png" class="draggable-image" draggable="true" id="Velkoz">
+        <img src="/championIcons/Quinn.png" class="draggable-image" draggable="true" id="Quinn">
+    </div>
+    <div class="image-row fourcost">
+        <img src="./championIcons/Aphelios.png" class="draggable-image" draggable="true" id="Aphelios">
+        <img src="/championIcons/Azir.png" class="draggable-image" draggable="true" id="Azir">
+        <img src="./championIcons/Fiora.png" class="draggable-image" draggable="true" id="Fiora">
+        <img src="/championIcons/JarvanIV.png" class="draggable-image" draggable="true" id="JarvanIV">
+        <img src="./championIcons/Kaisa.png" class="draggable-image" draggable="true" id="Kaisa">
+        <img src="/championIcons/Mordekaiser.png" class="draggable-image" draggable="true" id="Mordekaiser">
+        <img src="./championIcons/Nasus.png" class="draggable-image" draggable="true" id="Nasus">
+        <img src="/championIcons/Nilah.png" class="draggable-image" draggable="true" id="Nilah">
+        <img src="./championIcons/Sejuani.png" class="draggable-image" draggable="true" id="Sejuani">
+        <img src="/championIcons/Shen.png" class="draggable-image" draggable="true" id="Shen">
+        <img src="./championIcons/Silco.png" class="draggable-image" draggable="true" id="Silco">
+        <img src="/championIcons/Xayah.png" class="draggable-image" draggable="true" id="Xayah">
+    </div>
+        <div class="image-row fivecost">
+            <img src="./championIcons/Aatrox.png" class="draggable-image" draggable="true" id="Aatrox">
+            <img src="/championIcons/Ahri.png" class="draggable-image" draggable="true" id="Ahri">
+            <img src="./championIcons/Belveth.png" class="draggable-image" draggable="true" id="Belveth">
+            <img src="/championIcons/Gangplank.png" class="draggable-image" draggable="true" id="Gangplank">
+            <img src="./championIcons/Heimerdinger.png" class="draggable-image" draggable="true" id="Heimerdinger">
+            <img src="/championIcons/KSante.png" class="draggable-image" draggable="true" id="KSante">
+            <img src="./championIcons/Ryze.png" class="draggable-image" draggable="true" id="Ryze">
+            <img src="/championIcons/Sion.png" class="draggable-image" draggable="true" id="Sion">
+            <img src="/tftItems/TFT_Consumable_TrainingDummy.png" class="draggable-image" draggable="true" id="TargetDummy">
+        </div>
+    </div>
+</div>
+</body>
+</html>

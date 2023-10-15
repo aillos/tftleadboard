@@ -1,0 +1,140 @@
+.main {
+    display:block;
+    --s: 80px;  /* size  */
+    --m: 10px;    /* margin */
+    --f: calc(1.732 * var(--s) + 4 * var(--m)  - 1px);
+
+}
+body{
+    background-color:#1d1d1d;
+}
+
+.container {
+    font-size: 0; /*disable white space between inline block element */
+    width:750px;
+    height:380px;
+    border: 2px solid #1d1d1d;
+    background-color:#1d1d1d;
+    justify-self: center;
+    margin: auto auto 15px;
+    position: relative;
+}
+
+.container div {
+    width: var(--s);
+    margin: var(--m);
+    height: calc(var(--s)*1.1547);
+    display: inline-block;
+    font-size:initial;
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+    background: #3e4044;
+    margin-bottom: calc(var(--m) - var(--s)*0.2885);
+    position: relative;
+}
+
+.container::before {
+    content: "";
+    width: calc(var(--s)/2 + var(--m));
+    float: left;
+    height: 120%;
+    shape-outside: repeating-linear-gradient(
+            #0000 0 calc(var(--f) - 3px),
+            #000  0 var(--f));
+}
+.imagecontainer{
+    width:655px;
+    height:265px;
+    margin: 28px auto;
+    background-color:#1d1d1d;
+    justify-self: center;
+    position: relative;
+    border: 2px solid #424040;
+    border-radius:10px;
+}
+.image-row {
+    padding:2px;
+    justify-content: center;
+    width:640px;
+    height:48px;
+    background-color:#1d1d1d;
+    justify-self: center;
+    margin: 1px auto auto 8px;
+    position: relative;
+}
+
+.image-row > img{
+    width:35px;
+    height:35px;
+    margin:3px;
+    border-radius:10%;
+}
+
+.onecost > img{
+    border :2px solid #808080;
+  }
+.twocost > img{
+    border :2px solid #11b288;
+}
+.threecost > img{
+    border :2px solid #207ac7;
+}
+.fourcost > img{
+    border :2px solid #c440da;
+}
+.fivecost > img{
+    border :2px solid #ffb93b;
+}
+
+.draggable-image {
+    width: var(--s);
+    height: calc(var(--s)*1.1547);
+    margin: var(--m);
+    cursor: pointer;
+}
+
+.overlay-image {
+    position: absolute;
+    top: 4px;          /* added 2px offset from the top */
+    left: 3px;         /* added 2px offset from the left */
+    width: calc(92%);  /* reduce width by 4% (2% from each side) */
+    height: calc(92%); /* reduce height by 4% (2% from each side) */
+    object-fit: cover;
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+}
+.image-button{
+    border-radius: 2px;
+    width:520px;
+    height:30px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 2px solid #1d1d1d;
+    border-radius: 20px;
+    text-align: center;
+    background-color:#1d1d1d;
+    margin-left: -15px;
+}
+.image-button > img {
+    width: 30px;
+    height: 30px;
+
+}
+
+.image-button > p {
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 18px;
+    color:white;
+}
+.refresh{
+    width:650px;
+    margin: auto auto -25px;
+    align-self: center;
+    background-color:#1d1d1d;
+    justify-content: left;
+}
+
