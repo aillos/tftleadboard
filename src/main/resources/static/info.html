@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Helpful info</title>
     <script src="navigation.js"></script>
-    <link rel="stylesheet" href="help.css">
+    <link rel="stylesheet" href="info.css">
     <link rel="stylesheet" href="nav.css">
 </head>
 <body>
@@ -17,8 +17,18 @@
     <div class="nav" id="contact" onclick="contact()">Contact</div>
 </div>
 <div class="info">
-    <img id="augments" src="./info/augmentChance.png">
-    <img id="chemMods" src="./info/chemMods.png">
+    <details class="details">
+        <summary>Augment Odds</summary>
+        <img src="./info/augmentChance.png">
+    </details>
+    <details>
+        <summary>Unit Odds</summary>
+        <img src="./info/unitOdds.png">
+    </details>
+    <details>
+        <summary>Player Damage</summary>
+        <img src="./info/playerDamage.png">
+    </details>
 </div>
 
 </body>

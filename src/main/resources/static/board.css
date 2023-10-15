@@ -10,7 +10,7 @@ body{
 }
 
 .container {
-    font-size: 0; /*disable white space between inline block element */
+    font-size: 0;
     width:750px;
     height:380px;
     border: 2px solid #1d1d1d;
@@ -94,10 +94,10 @@ body{
 
 .overlay-image {
     position: absolute;
-    top: 4px;          /* added 2px offset from the top */
-    left: 3px;         /* added 2px offset from the left */
-    width: calc(92%);  /* reduce width by 4% (2% from each side) */
-    height: calc(92%); /* reduce height by 4% (2% from each side) */
+    top: 4px;
+    left: 3px;
+    width: calc(92%);
+    height: calc(92%);
     object-fit: cover;
     clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
 }

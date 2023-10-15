@@ -16,14 +16,14 @@
     margin-bottom:-35px;
 }
 .headLogo {
-    display: flex; /* Add display flex */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #1d1d1d;
     height: 275px;
 }
 
 .headLogo > img {
-    max-height: 100%; /* Adjust the height to maintain aspect ratio */
-    max-width: 100%; /* Adjust the width to maintain aspect ratio */
+    max-height: 100%;
+    max-width: 100%;
 }

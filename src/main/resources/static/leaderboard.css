@@ -91,7 +91,7 @@
     margin: 10px;
     border: 2px solid #424040;
     border-radius: 10px;
-    overflow: hidden; /* Add this property */
+    overflow: hidden;
 }
 
 .player:hover{

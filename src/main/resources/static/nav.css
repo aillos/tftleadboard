@@ -10,9 +10,9 @@
     height:35px;
     border:2px solid #424040;
     border-radius:25px;
-    display: flex;             /* Makes the container a flexbox container */
-    justify-content: space-between; /* Distributes the items evenly with space in between */
-    align-items: center;      /* Aligns items in the center vertically */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0px 20px;
     z-index:10;
 }
@@ -20,6 +20,6 @@
     cursor:pointer;
 }
 .navigation a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit color from parent so it doesn't change */
+    text-decoration: none;
+    color: inherit;
 }
