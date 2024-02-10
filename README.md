@@ -1,3 +1,5 @@
+*Temporarily on hiatus while chnages are being made, website has been shut down due to this as well. However there will be some screenshots of the way it looked.*
+
 # [TFT Leaderboard](https://tft.aillos.no)
 
 This repository is for the web application or website; TFT Leaderboard.
